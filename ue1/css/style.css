@@ -1,0 +1,152 @@
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #333333;
+  background-color: rgb(139, 139, 139);
+  min-width: 850px;
+  min-height: 730px;
+}
+
+#wrapper {
+  border: 1px black solid;
+  width: 820px;
+  height: 730px;
+  margin: 0px auto;
+  margin-top: 25px;
+}
+
+#header {
+  display: block;
+  height: 70px;
+  background-image: url('../img/header_right.png'), url('../img/header_fill.png');
+  background-repeat: no-repeat, repeat-x;
+  background-position: right, left;
+}
+
+#nav {
+  text-align: right;
+  height: 25px;
+  background-color: rgb(48, 48, 48);
+  color: white;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 0 10px 0 0;
+  margin: 0 0 0 0;
+}
+
+#nav ul {
+  padding: 3px 0 0 0;
+  margin: 0 0 0 0;
+}
+
+#nav li {
+  display: inline-block;
+  list-style: none;
+}
+
+#nav li a {
+  color: white;
+  text-decoration: none;
+}
+
+#spielfeld {
+  background-image: url('../img/field_background.png');
+  height: 633px;
+}
+
+#info {
+  border: 1px solid black;
+  width: 250px;
+  color: rgb(255, 153, 0);
+  background-color: rgb(48, 48, 48);
+  padding: 0 0 20px 10px;
+  line-height: 22px;
+  display: inline-block;
+  float: left;
+  }
+
+#info h1 {
+  margin: 0 0 5 0;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+div.beschreibung {
+  display: inline-block;
+  width: 180px;
+}
+
+div.beschreibungspieler {
+  display: inline-block;
+  width: 100px;
+}
+
+div.wert {
+  display: inline-block;
+  color: white;
+}
+
+#strecke {
+  display: inline-block;
+  margin: 20px 0 0 100px;
+  height: 596px;
+  width: 123px;
+}
+
+div.streckestart {
+  height: 98px;
+  width: 123px;
+  background-image: url('../img/start_road.png');
+  background-repeat: no-repeat;
+}
+
+div.streckeempty {
+  height: 80px;
+  width: 123px;
+  background-image: url('../img/empty_road.png');
+  background-repeat: no-repeat;
+}
+
+div.streckeoil {
+  height: 80px;
+  width: 123px;
+  background-image: url('../img/oil_road.png');
+  background-repeat: no-repeat;
+}
+
+div.streckeende {
+  height: 98px;
+  width: 123px;
+  background-image: url('../img/finish_road.png');
+  background-repeat: no-repeat;
+}
+
+img.auto1 {
+  float: left;
+  padding: 15px; 
+}
+
+img.auto2 {
+  float: right;
+  padding: 15px;
+}
+
+#wuerfel {
+  display: inline-block;
+  float: right;
+  margin: 20px 100px 0 0;
+  text-align: center;
+  border: 3px solid rgb(255, 204, 0);
+  background-color: rgb(48, 48, 48);
+  width: 120px;
+}
+
+#wuerfel span{
+  color: white;
+  font-size: 20px;
+}
+
+#wuerfel img{
+  margin: 10px;
+}
