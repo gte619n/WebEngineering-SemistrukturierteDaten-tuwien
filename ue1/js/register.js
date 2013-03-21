@@ -15,7 +15,7 @@ $(document).ready(function() {
   var validateRegisterName = function() {
     var registerElem = $('#registername');
     var registerNamelength = registerElem.val().length;
-    if ((registerNamelength > 0 && registerNamelength < 4) || registerNamelength > 8) {
+    if (registerNamelength < 4 || registerNamelength > 8) {
       $('#registernameerror').html('Der Benutzername muss mindestens 4 Zeichen und darf maximal 8 Zeichen enthalten.');
       registerElem.addClass('error');
       validRegisterName = false;
@@ -30,7 +30,7 @@ $(document).ready(function() {
   var validateRegisterPassword = function() {
     var registerElem = $('#registerpassword');
     var registerPassowrdlength = registerElem.val().length;
-    if ((registerPassowrdlength > 0 && registerPassowrdlength < 4) || registerPassowrdlength > 8) {
+    if  (registerPassowrdlength < 4 || registerPassowrdlength > 8) {
       $('#registerpassworderror').html('Das Passwort muss mindestens 4 Zeichen und darf maximal 8 Zeichen enthalten.');
       registerElem.addClass('error');
       validRegisterPassword = false;
