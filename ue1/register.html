@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+  <head>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <title>Formel 0 - Spielen</title>
+    <script type="text/javascript" src="lib/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="scripts/register.js"></script>
+  </head>
+<body>
+  <div id="wrapper">
+    <div id="header">
+      <a href="index.html"><img src="img/header_left.png" alt="Header left" /></a>
+    </div>
+    <div id="nav">
+      <ul>
+        <li>| <a href="#">Einloggen</a></li>
+      </ul>
+    </div>
+    <div class="blankbg">
+      <h1>Registrieren</h1>
+      <div>Bitte füllen Sie das unten stehende Formular aus!</div>
+      <form action="">
+        <h2>Persönliche Daten</h2>
+        <div class="formreihe">
+          <div class="formbeschreibung">Vorname</div>
+          <input type="text" />
+          <div class="formerror"></div>
+        </div>
+        <div class="formreihe">
+          <div class="formbeschreibung">Nachname</div>
+          <input type="text" />
+          <div class="formerror"></div>
+        </div>
+        <div class="formreihe">
+          <div class="formbeschreibung">Geburtstag</div>
+          <input type="text" id="registerdate" />
+          <div class="formerror" id="registerdateerror"></div>
+        </div>
+        <div class="formreihe">
+          <div class="formbeschreibung">Geschlecht</div>
+          <select>
+            <option value="m">männlich</option>          
+            <option value="w">weiblich</option>
+          </select>
+          <div class="formerror"></div>
+        </div>
+        <h2>Login Daten</h2>
+        <div class="formreihe">
+          <div class="formbeschreibung">Benutzername</div>
+          <input type="text" id="registername" />
+          <div class="formerror" id="registernameerror"></div>
+        </div>
+        <div class="formreihe">
+          <div class="formbeschreibung">Passwort</div>
+          <input type="password" id="registerpassword" />
+          <div class="formerror" id="registerpassworderror" ></div>
+        </div>
+        <div>
+          <input type="submit" value="Registrieren" id="registerBtn" />
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="footer">
+    &copy; 2013 - Philip Miglinci, Michael Kirchknopf, Matthes Koenen
+  </div>
+</body>
+</html>
