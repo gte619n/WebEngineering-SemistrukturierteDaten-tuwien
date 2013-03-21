@@ -1,0 +1,209 @@
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #333333;
+  background-color: rgb(139, 139, 139);
+  min-width: 850px;
+  min-height: 730px;
+}
+
+#wrapper {
+  border: 1px black solid;
+  min-width: 820px;
+  max-width: 1000px;
+  width: 90%;
+  height: 730px;
+  margin: 0px auto;
+  margin-top: 25px;
+}
+
+.footer {
+  padding-top: 10px;
+  min-width: 820px;
+  max-width: 1000px;
+  width: 90%;
+  margin: 0px auto;
+  text-align: right;
+}
+
+#header {
+  background-image: url('../img/header_fill.png');
+  height: 70px;
+}
+
+#headerright {
+  float: right;
+  height: 70px;
+  width: 40px;
+  float: right;
+  background-image: url('../img/header_right.png');
+  background-color: red;
+
+}
+
+#nav {
+  text-align: right;
+  height: 25px;
+  background-color: rgb(48, 48, 48);
+  color: white;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 0 10px 0 0;
+  margin: 0 0 0 0;
+}
+
+#nav ul {
+  padding: 3px 0 0 0;
+  margin: 0 0 0 0;
+}
+
+#nav li {
+  display: inline;
+  list-style: none;
+}
+
+#nav li a {
+  color: white;
+  text-decoration: none;
+}
+
+.spielfeld {
+  background-image: url('../img/field_background.png');
+  height: 633px;
+}
+
+#info {
+  border: 1px solid black;
+  width: 250px;
+  color: rgb(255, 153, 0);
+  background-color: rgb(48, 48, 48);
+  padding: 0 0 20px 10px;
+  line-height: 22px;
+  float: left;
+  }
+
+#info h1 {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+td.info {
+  width: 165px;
+}
+
+td.wert {
+  color: white;
+}
+
+td.spieler {
+  width: 100px;
+}
+
+
+#strecke {
+  float: left;
+  margin: 20px 0 0 100px;
+  height: 596px;
+  width: 123px;
+}
+
+div.streckestart {
+  height: 98px;
+  width: 123px;
+  background-image: url('../img/start_road.png');
+  background-repeat: no-repeat;
+}
+
+div.streckeempty {
+  height: 80px;
+  width: 123px;
+  background-image: url('../img/empty_road.png');
+  background-repeat: no-repeat;
+}
+
+div.streckeoil {
+  height: 80px;
+  width: 123px;
+  background-image: url('../img/oil_road.png');
+  background-repeat: no-repeat;
+}
+
+div.streckeende {
+  height: 98px;
+  width: 123px;
+  background-image: url('../img/finish_road.png');
+  background-repeat: no-repeat;
+}
+
+img.auto1 {
+  float: left;
+  padding: 15px; 
+}
+
+img.auto2 {
+  float: right;
+  padding: 15px;
+}
+
+#wuerfel {
+  float: left;
+  margin: 20px 0 0 100px;
+  text-align: center;
+  border: 3px solid rgb(255, 204, 0);
+  background-color: rgb(48, 48, 48);
+  width: 120px;
+}
+
+#wuerfel img {
+  cursor: pointer;
+
+}
+#wuerfel span{
+  color: white;
+  font-size: 20px;
+}
+
+#wuerfel img{
+  margin: 10px;
+}
+
+.blankbg {
+  height: 593px;
+  background-color: white;
+  margin: 0;
+  padding: 20px;
+}
+
+.blankbg h1 {
+  color: rgb(255, 153, 0);
+  margin-top: 0;
+  padding-top: 10px;
+}
+
+.formreihe {
+  height: 35px;
+}
+
+form .formbeschreibung {
+  width: 200px;
+  float: left;
+  margin: 5px 0;
+}
+
+form input {
+
+}
+
+form .error {
+  background-color: red;
+}
+
+form .formerror {
+  display: inline;
+  color: red;
+}
+
+form #registerBtn {
+  margin-top: 20px;
+}

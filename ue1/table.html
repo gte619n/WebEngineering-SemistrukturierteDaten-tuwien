@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+  <head>
+    <link rel="stylesheet" type="text/css" href="css/screen.css" />
+    <title>Formel 0 - Spielen</title>
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="js/car.js"></script>
+  </head>
+<body>
+  <div id="wrapper">
+    <div id="header">
+      <a href="index.html"><img src="img/header_left.png" alt="Header left" /></a>
+      <div id="headerright"></div>
+    </div>
+    <div id="nav">
+      <ul>
+        <li>| <a href="#">Neues Spiel</a></li>
+        <li>| <a href="#">Ausloggen</a></li>
+      </ul>
+    </div>
+    <div class="spielfeld">
+      <div id="info">
+        <h1>Spielinformationen</h1>
+          <table>
+            <tr>
+              <td class="info">Führender</td>
+              <td class="wert">Super C</td>
+            </tr>
+            <tr>
+              <td class="info">Runde</td>
+              <td class="wert">1</td>
+            </tr>
+            <tr>
+              <td class="info">Zeit</td>
+              <td class="wert">02:30</td>
+            </tr>
+            <tr>
+              <td class="info">Würfelergebnis <em>Super C</em></td>
+              <td class="wert">3</td>
+            </tr>
+          </table>
+        <h1>Spieler</h1>
+          <table>
+            <tr>
+              <td class="spieler">Spieler 1</td>
+              <td class="wert">Super Mario</td>
+            </tr>
+            <tr>
+              <td class="spieler">Spieler 2</td>
+              <td class="wert">Super C</td>
+            </tr>
+          </table>
+      </div>
+      <div id="strecke">
+        <div id="pos1" class="streckestart"></div>
+        <div id="pos2" class="streckeempty"></div>
+        <div id="pos3" class="streckeoil"><img id="car1" class="auto1" src="img/car1.png" alt="Auto 1" /></div>
+        <div id="pos4" class="streckeempty"></div>
+        <div id="pos5" class="streckeempty"><img src="img/car2.png" class="auto2" alt="Auto 2" /></div>
+        <div id="pos6" class="streckeoil"></div>
+        <div id="pos7" class="streckeende"></div>
+      </div>
+      <div id="wuerfel">
+        <span>Super Mario</span>
+        <img src="img/wuerfel1.png" alt="Würfel" />
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    &copy; 2013 - Philip Miglinci, Michael Kirchknopf, Matthes Koenen
+  </div>
+</body>
+</html>
