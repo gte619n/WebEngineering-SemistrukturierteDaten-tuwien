@@ -93,6 +93,18 @@
 
   <script type="text/javascript">
     //<![CDATA[
+      
+      /**
+       * How to:
+       *
+       * 1.) on docuemt load initilize
+       * 2.) onclick http post request
+       * 3.) modify DOM
+       *
+       * Modify:
+       * 1.) Serverseitig Session handeln
+       * 2.) neues spiel macht einen reset
+       */
     
     function log() {
       $("#hidden_form").submit()
