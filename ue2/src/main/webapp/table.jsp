@@ -1,9 +1,3 @@
-<%-- 
-    Document   : table
-    Created on : 19.04.2013, 11:56:30
-    Author     : Matthes Laptop
---%>
-
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
 <jsp:useBean id="player1" scope = "session" class="Beans.Player" />
 <jsp:useBean id="game" scope = "session" class="Beans.Game" />
