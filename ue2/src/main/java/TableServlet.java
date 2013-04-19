@@ -11,14 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class TableServlet extends HttpServlet {
-  private Player player1;
-  private Player player2;
-  private Game game;
+  private Player player1 = null;
+  private Player player2 = null;
+  private Game game = null;
   
   protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    player1 = new Player("Huber");
-    player2 = new Player("Super C");
-    game = new Game(player1, player2);
 
     HttpSession session = request.getSession(true);
     session.setAttribute("player1", player1);
@@ -30,14 +27,16 @@ public class TableServlet extends HttpServlet {
   }
 
   @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-  throws ServletException, IOException {  
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    player1 = new Player("Huber");
+    player2 = new Player("Super C");
+    game = new Game(player1, player2);
     processRequest(request, response);
   }
 
   @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-  throws ServletException, IOException {
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    player1.setPlayerName(request.getParameter("name").toString());
     processRequest(request, response);
   }
 
