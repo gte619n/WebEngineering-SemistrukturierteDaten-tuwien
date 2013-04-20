@@ -64,6 +64,10 @@ public class Game {
       return "mehrere";
   }
 
+  public void increaseRound() {
+    round++;
+  }
+
   public int getRound() {
     return round;
   }
