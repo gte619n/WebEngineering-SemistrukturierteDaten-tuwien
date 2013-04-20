@@ -15,8 +15,9 @@ public class TableServlet extends HttpServlet {
   
   protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    HttpSession session = request.getSession();
+    HttpSession session = request.getSession(true);
 
+    tableController.resetGame(session);
 
     session.setAttribute("player1", tableController.getGame(session).getPlayer1());
     session.setAttribute("player2", tableController.getGame(session).getPlayer2());

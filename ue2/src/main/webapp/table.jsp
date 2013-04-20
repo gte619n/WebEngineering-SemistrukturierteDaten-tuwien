@@ -30,9 +30,9 @@
           <h2>Spielinformationen</h2>
           <table summary="Diese Tabelle zeigt Informationen zum aktuellen Spiel">
             <tr><th id="leaderLabel" class="label">F&uuml;hrender</th><td id="leader" class="data">mehrere</td></tr>
-            <tr><th id="roundLabel" class="label">Runde</th><td id="round" class="data">1</td></tr>
-            <tr><th id="timeLabel" class="label">Zeit</th><td id="time" class="data">02:30</td></tr>
-            <tr><th id="computerScoreLabel" class="label">W&uuml;rfelergebnis <em><%=player2.getPlayerName()%></em></th><td id="computerScore" class="data">3</td></tr>
+            <tr><th id="roundLabel" class="label">Runde</th><td id="round" class="data">0</td></tr>
+            <tr><th id="timeLabel" class="label">Zeit</th><td id="time" class="data">00:00</td></tr>
+            <tr><th id="computerScoreLabel" class="label">W&uuml;rfelergebnis <em><%=player2.getPlayerName()%></em></th><td id="computerScore" class="data">0</td></tr>
           </table>  
           <h2>Spieler</h2>
           <table summary="Diese Tabelle listet die Namen der Spieler auf">

@@ -13,15 +13,18 @@ public class TableController {
   }
 
   public Game getGame(HttpSession session) {
-    if (gameHashMap.containsKey(session.getId()))
-      gameHashMap.put(session.getId(), new Game(new Player("Spieler"), new Player("Super C")));
+    if (!gameHashMap.containsKey(session.getId())) {
+      Game game = new Game(new Player("Spieler"), new Player("Super C"));
+      gameHashMap.put(session.getId(), game);
+      
+    }
 
     return gameHashMap.get(session.getId());
   }
 
-  public Game resetGame(HttpSession session) {
-
-    return null;
+  public void resetGame(HttpSession session) {
+    Game game = new Game(new Player("Spieler"), new Player("Super C"));
+    gameHashMap.put(session.getId(), game);
   }
 
 }
