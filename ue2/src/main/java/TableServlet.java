@@ -11,16 +11,16 @@ import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonFactory;
 
 public class TableServlet extends HttpServlet {
-  private Player player1 = null;
-  private Player player2 = null;
-  private Game game = null;
+  private TableController tableController = new TableController();
   
   protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    HttpSession session = request.getSession(true);
-    session.setAttribute("player1", player1);
-    session.setAttribute("player2", player2);
-    session.setAttribute("game", game);
+    HttpSession session = request.getSession();
+
+
+    session.setAttribute("player1", tableController.getGame(session).getPlayer1());
+    session.setAttribute("player2", tableController.getGame(session).getPlayer2());
+    session.setAttribute("game", tableController.getGame(session));
     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/table.jsp");
     dispatcher.forward(request, response);
 
@@ -28,14 +28,17 @@ public class TableServlet extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    player1 = new Player("Huber");
-    player2 = new Player("Super C");
-    game = new Game(player1, player2);
+
     processRequest(request, response);
   }
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    //get objects
+    Game game = tableController.getGame(request.getSession());
+    Player player1 = game.getPlayer1();
+    Player player2 = game.getPlayer2();
 
     //do business logic
     game.performDice(player1);
@@ -52,6 +55,7 @@ public class TableServlet extends HttpServlet {
     jsonResponse.writeStartObject();
 
     //JSON Body
+    jsonResponse.writeStringField("currentSession", request.getSession().getId());
     jsonResponse.writeStringField("gameTime", game.getTime());
     jsonResponse.writeNumberField("gameRound", game.getRound());
     jsonResponse.writeNumberField("player1DiceResult", player1.getDiceResult());
