@@ -103,6 +103,7 @@
     var positionMap =  {"0" : "#start_road", "1" : "#road_1", "2" : "#road_2", "3" : "#road_3", "4" : "#road_4", "5" : "#road_5", "6" : "#finish_road"};
     var currentPlayerPosition = [0,0];
     var gameFinished = false;
+    var moveFinished = true;
       
     function performRequest(callback) {
       $.post(window.location.href, function(data) {
@@ -152,7 +153,8 @@
     }
     
     $("#dice").click(function() {
-      if (!gameFinished) {
+      if (!gameFinished && moveFinished) {
+        moveFinished = false;
         prepareAnimation();
         performRequest(function(data) {
           $("#leader").html(data.gameLeader);
@@ -165,6 +167,7 @@
               if (data.gameFinished == "true")
                 finishGame();
               completeAnimation();
+              moveFinished = true;
             });
           });
         });
