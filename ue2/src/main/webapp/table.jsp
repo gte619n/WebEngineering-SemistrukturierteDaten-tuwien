@@ -123,6 +123,8 @@
       prepareAnimation();
       performRequest(function(data) {
         $("#time").html(data.gameTime);
+        $("#round").html(data.gameRound);
+        $("#computerScore").html(data.player2DiceResult);
         $("#player1").fadeOut(700, function() {
           $("#player1").appendTo("#start_road");
           $("#player1").fadeIn(700,completeAnimation);

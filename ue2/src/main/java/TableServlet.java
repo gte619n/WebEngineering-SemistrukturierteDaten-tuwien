@@ -39,6 +39,10 @@ public class TableServlet extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    //do business logic
+    game.performDice(player1);
+    game.performDice(player2);
+
     // prepare request
     response.setContentType("application/json");
     response.setCharacterEncoding("UTF-8");
@@ -50,6 +54,11 @@ public class TableServlet extends HttpServlet {
 
     //JSON Body
     jsonResponse.writeStringField("gameTime", game.getTime());
+    jsonResponse.writeNumberField("gameRound", game.getRound());
+    jsonResponse.writeNumberField("player1DiceResult", player1.getDiceResult());
+    jsonResponse.writeNumberField("player2DiceResult", player2.getDiceResult());
+    jsonResponse.writeNumberField("player1Position", player1.getPositon());
+    jsonResponse.writeNumberField("player2Position", player2.getPositon());
 
     // end JSON writer
     jsonResponse.writeEndObject();
