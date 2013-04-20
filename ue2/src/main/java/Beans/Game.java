@@ -53,6 +53,10 @@ public class Game {
     }
   }
 
+  public void increaseRound() {
+    round++;
+  }
+
   public int getRound() {
     return round;
   }

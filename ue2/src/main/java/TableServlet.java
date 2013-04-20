@@ -42,6 +42,7 @@ public class TableServlet extends HttpServlet {
     //do business logic
     game.performDice(player1);
     game.performDice(player2);
+    game.increaseRound();
 
     // prepare request
     response.setContentType("application/json");
