@@ -108,6 +108,26 @@
         callback(data);
       });
     }
+
+    function movePlayer(playerIdString, playerId, diceResult, finalPosition, callback) {
+      $(playerIdString).fadeOut(700, function() {
+        $(playerIdString).appendTo(positionMap[currentPlayerPosition[playerId] + diceResult]);
+        currentPlayerPosition[playerId] = currentPlayerPosition[playerId] + diceResult;
+        $(playerIdString).fadeIn(700, function() {
+          if (currentPlayerPosition[playerId]!= finalPosition) {
+            $(playerIdString).fadeOut(700, function() {
+              $(playerIdString).appendTo(positionMap[finalPosition]);
+              currentPlayerPosition[playerId] = finalPosition;
+              $(playerIdString).fadeIn(700, function() {
+                callback();
+              });
+            });
+          } else {
+            callback();
+          }
+        });
+      });
+    }
     
     // call this function once before starting the animations
     function prepareAnimation() {
@@ -130,21 +150,8 @@
         $("#round").html(data.gameRound);
         $("#computerScore").html(data.player2DiceResult);
         $("#diceImage").attr("src","img/wuerfel"+data.player1DiceResult+".png");
-        $("#player1").fadeOut(700, function() {
-          $("#player1").appendTo(positionMap[currentPlayerPosition[0] + data.player1DiceResult]);
-          currentPlayerPosition[0] = currentPlayerPosition[0] + data.player1DiceResult;
-          $("#player1").fadeIn(700, function() {
-            if (currentPlayerPosition[0]!= data.player1Position) {
-              $("#player1").fadeOut(700, function() {
-                $("#player1").appendTo(positionMap[data.player1Position]);
-                currentPlayerPosition[0] = data.player1Position;
-                $("#player1").fadeIn(700);
-              });
-            }
-          });
-          $("#player2").fadeOut(700, function() {
-            $("#player2").appendTo(positionMap[data.player2DiceResult]);
-            $("#player2").fadeIn(700);
+        movePlayer('#player1', 0, data.player1DiceResult, data.player1Position, function() {
+          movePlayer('#player2', 1, data.player2DiceResult, data.player2Position, function() {
             completeAnimation();
           });
         });
