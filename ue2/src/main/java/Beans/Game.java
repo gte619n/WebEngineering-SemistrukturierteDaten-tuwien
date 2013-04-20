@@ -52,6 +52,17 @@ public class Game {
       finished = true;
     }
   }
+  
+  public String getLeader(){
+      if(player1.getPositon() > player2.getPositon())
+      {
+          return player1.getPlayerName();
+      }
+      else if (player1.getPositon() < player2.getPositon()){
+          return player2.getPlayerName();
+      }
+      return "mehrere";
+  }
 
   public int getRound() {
     return round;

@@ -59,7 +59,8 @@ public class TableServlet extends HttpServlet {
     jsonResponse.writeNumberField("player2DiceResult", player2.getDiceResult());
     jsonResponse.writeNumberField("player1Position", player1.getPositon());
     jsonResponse.writeNumberField("player2Position", player2.getPositon());
-
+    jsonResponse.writeStringField("gameLeader", game.getLeader());
+    
     // end JSON writer
     jsonResponse.writeEndObject();
     jsonResponse.close();

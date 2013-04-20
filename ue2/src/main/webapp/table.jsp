@@ -122,6 +122,7 @@
     $("#dice").click(function() {   
       prepareAnimation();
       performRequest(function(data) {
+        $("#leader").html(data.gameLeader);
         $("#time").html(data.gameTime);
         $("#round").html(data.gameRound);
         $("#computerScore").html(data.player2DiceResult);
