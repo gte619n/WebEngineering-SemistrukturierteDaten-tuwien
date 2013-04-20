@@ -29,8 +29,8 @@
           <h2>Spielinformationen</h2>
           <table summary="Diese Tabelle zeigt Informationen zum aktuellen Spiel">
             <tr><th id="leaderLabel" class="label">F&uuml;hrender</th><td id="leader" class="data">Super C</td></tr>
-            <tr><th id="roundLabel" class="label">Runde</th><td id="round" class="data">1</td></tr>
-            <tr><th id="timeLabel" class="label">Zeit</th><td id="time" class="data">02:30</td></tr>
+            <tr><th id="roundLabel" class="label">Runde</th><td id="round" class="data">0</td></tr>
+            <tr><th id="timeLabel" class="label">Zeit</th><td id="time" class="data">00:00</td></tr>
             <tr><th id="computerScoreLabel" class="label">W&uuml;rfelergebnis <em>Super C</em></th><td id="computerScore" class="data">3</td></tr>
           </table>  
           <h2>Spieler</h2>
@@ -101,6 +101,7 @@
     
     var positionMap =  {"0" : "#start_road", "1" : "#road_1", "2" : "#road_2", "3" : "#road_3", "4" : "#road_4", "5" : "#road_5", "6" : "#finish_road"};
     var currentPlayerPosition = [0,0];
+    var gameFinished = false;
       
     function performRequest(callback) {
       $.post(window.location.href, function(data) {
@@ -114,7 +115,7 @@
         $(playerIdString).appendTo(positionMap[currentPlayerPosition[playerId] + diceResult]);
         currentPlayerPosition[playerId] = currentPlayerPosition[playerId] + diceResult;
         $(playerIdString).fadeIn(700, function() {
-          if (currentPlayerPosition[playerId]!= finalPosition) {
+          if (currentPlayerPosition[playerId] !== finalPosition) {
             $(playerIdString).fadeOut(700, function() {
               $(playerIdString).appendTo(positionMap[finalPosition]);
               currentPlayerPosition[playerId] = finalPosition;
@@ -127,6 +128,13 @@
           }
         });
       });
+    }
+
+    function finishGame() {
+      gameFinished = true;
+      $("#diceImage").attr("src","img/wuerfel0.png");
+
+
     }
     
     // call this function once before starting the animations
@@ -142,20 +150,24 @@
       $("body").append(div);
     }
     
-    $("#dice").click(function() {   
-      prepareAnimation();
-      performRequest(function(data) {
-        $("#leader").html(data.gameLeader);
-        $("#time").html(data.gameTime);
-        $("#round").html(data.gameRound);
-        $("#computerScore").html(data.player2DiceResult);
-        $("#diceImage").attr("src","img/wuerfel"+data.player1DiceResult+".png");
-        movePlayer('#player1', 0, data.player1DiceResult, data.player1Position, function() {
-          movePlayer('#player2', 1, data.player2DiceResult, data.player2Position, function() {
-            completeAnimation();
+    $("#dice").click(function() {
+      if (!gameFinished) {
+        prepareAnimation();
+        performRequest(function(data) {
+          $("#leader").html(data.gameLeader);
+          $("#time").html(data.gameTime);
+          $("#round").html(data.gameRound);
+          $("#computerScore").html(data.player2DiceResult);
+          $("#diceImage").attr("src","img/wuerfel"+data.player1DiceResult+".png");
+          movePlayer('#player1', 0, data.player1DiceResult, data.player1Position, function() {
+            movePlayer('#player2', 1, data.player2DiceResult, data.player2Position, function() {
+              if (data.gameFinished == "true")
+                finishGame();
+              completeAnimation();
+            });
           });
         });
-      });
+      }
       return false;
     });
     //]]>

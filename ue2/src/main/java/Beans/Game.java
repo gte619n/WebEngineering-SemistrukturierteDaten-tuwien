@@ -35,18 +35,22 @@ public class Game {
 
   public void performDice(Player currentPlayer){
     if(!isFinished()){
-        checkFinish(currentPlayer);
-        currentPlayer.setDiceResult((int)(Math.random()*3+1));
-        currentPlayer.setPosition(currentPlayer.getPositon()+currentPlayer.getDiceResult());
-        if(currentPlayer.getPositon()== 2 || currentPlayer.getPositon() == 5){
-            resetPlayer(currentPlayer);
-        }
-        checkFinish(currentPlayer);
-    }
-    else{
-        currentPlayer.setDiceResult(0);
+      checkFinish(currentPlayer);
+      currentPlayer.setDiceResult((int)(Math.random()*3+1));
+      currentPlayer.setPosition(currentPlayer.getPositon()+currentPlayer.getDiceResult());
+
+      if (currentPlayer.getPositon() >  6)
+        currentPlayer.setPosition(6);
+
+      if(currentPlayer.getPositon()== 2 || currentPlayer.getPositon() == 5)
+        resetPlayer(currentPlayer);
+      
+      checkFinish(currentPlayer);
     }
     //else: already finished the game
+    else{
+      currentPlayer.setDiceResult(0);
+    }
   }
 
   private void resetPlayer(Player player){
@@ -60,20 +64,18 @@ public class Game {
   }
   
   public String getLeader(){
-      if(player1.getPositon() > player2.getPositon())
-      {
-          return player1.getPlayerName();
-      }
-      else if (player1.getPositon() < player2.getPositon()){
-          return player2.getPlayerName();
-      }
-      return "mehrere";
+    if(player1.getPositon() > player2.getPositon()) {
+      return player1.getPlayerName();
+    }
+    else if (player1.getPositon() < player2.getPositon()) {
+      return player2.getPlayerName();
+    }
+    return "mehrere";
   }
 
   public void increaseRound() {
-      if(!isFinished()){
-        round++;
-      }
+    if(!isFinished())
+      round++;
   }
 
   public int getRound() {
@@ -81,10 +83,10 @@ public class Game {
   }
 
   public String getTime() {
-      if(!isFinished()){
-        lastTime = System.currentTimeMillis() - startTime;
-      }
-      return format.format(lastTime);
+    if(!isFinished()){
+      lastTime = System.currentTimeMillis() - startTime;
+    }
+    return format.format(lastTime);
   }
 
   public Player getPlayer1() {
