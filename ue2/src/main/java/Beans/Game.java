@@ -17,8 +17,8 @@ public class Game {
   private long startTime; 
   private Player player1;
   private Player player2;
-  private int[] oilPosition;
   private boolean finished;
+  private long lastTime;
   private final static SimpleDateFormat format = new SimpleDateFormat("mm:ss");
 
   public Game() {
@@ -27,20 +27,23 @@ public class Game {
   public Game(Player player1, Player player2){
     this.player1 = player1;
     this.player2 = player2;
-    oilPosition = new int[]{2, 5};
     finished = false;
     startTime = System.currentTimeMillis();
+    lastTime = 0;
   }
 
 
   public void performDice(Player currentPlayer){
-    checkFinish(currentPlayer);
-    currentPlayer.setDiceResult((int)(Math.random()*3+1));
-    currentPlayer.setPosition(currentPlayer.getPositon()+currentPlayer.getDiceResult());
-    if(currentPlayer.getPositon()== 2 || currentPlayer.getPositon() == 5){
-      resetPlayer(currentPlayer);
+    if(!isFinished()){
+        checkFinish(currentPlayer);
+        currentPlayer.setDiceResult((int)(Math.random()*3+1));
+        currentPlayer.setPosition(currentPlayer.getPositon()+currentPlayer.getDiceResult());
+        if(currentPlayer.getPositon()== 2 || currentPlayer.getPositon() == 5){
+        resetPlayer(currentPlayer);
+        }
+        checkFinish(currentPlayer);
     }
-    checkFinish(currentPlayer);
+    //else: already finished the game
   }
 
   private void resetPlayer(Player player){
@@ -48,7 +51,7 @@ public class Game {
   }
 
   private void checkFinish(Player player){
-    if(player.getPositon() >= 7){
+    if(player.getPositon() >= 6){
       finished = true;
     }
   }
@@ -65,7 +68,9 @@ public class Game {
   }
 
   public void increaseRound() {
-    round++;
+      if(!isFinished()){
+        round++;
+      }
   }
 
   public int getRound() {
@@ -73,7 +78,10 @@ public class Game {
   }
 
   public String getTime() {
-    return format.format(System.currentTimeMillis() - startTime);
+      if(!isFinished()){
+        lastTime = System.currentTimeMillis() - startTime;
+      }
+      return format.format(getLastTime());
   }
 
   public Player getPlayer1() {
@@ -86,5 +94,9 @@ public class Game {
 
   public boolean isFinished() {
     return finished;
+  }
+  
+  private long getLastTime(){
+      return lastTime;
   }
 }
