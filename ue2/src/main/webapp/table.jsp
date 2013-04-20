@@ -75,7 +75,7 @@
           <h2 class="accessibility">W&uuml;rfelbereich</h2>
           <span class="accessibility">An der Reihe ist</span><div id="currentPlayerName"><%=player1.getPlayerName()%></div>
           <a id="dice" href="#" tabindex="4">
-            <img id="diceImage" src="img/wuerfel1.png" alt="W&uuml;rfel mit einer Eins" />	
+            <img id="diceImage" src="img/wuerfel0.png" alt="W&uuml;rfel mit einer Eins" />	
           </a>
         </div>
       </div>
@@ -98,6 +98,8 @@
        * 1.) Serverseitig Session handeln
        * 2.) neues spiel macht einen reset
        */
+    
+    var positionMap =  {"0" : "#start_road", "1" : "#road_1", "2" : "#road_2", "3" : "#road_3", "4" : "#road_4", "5" : "#road_5", "6" : "#finish_road"};
       
     function performRequest(callback) {
       $.post(window.location.href, function(data) {
@@ -126,10 +128,18 @@
         $("#time").html(data.gameTime);
         $("#round").html(data.gameRound);
         $("#computerScore").html(data.player2DiceResult);
+        $("#diceImage").attr("src","img/wuerfel"+data.player1DiceResult+".png");
         $("#player1").fadeOut(700, function() {
-          $("#player1").appendTo("#start_road");
-          $("#player1").fadeIn(700,completeAnimation);
+          $("#player1").appendTo(positionMap[data.player1DiceResult]);
+          $("#player1").fadeIn(700, function() {
+            $("#player2").fadeOut(700, function() {
+              $("#player2").appendTo(positionMap[data.player2DiceResult]);
+              $("#player2").fadeIn(700);
+              completeAnimation();
+            })
+          });
         })
+
       });
       return false;
     });
