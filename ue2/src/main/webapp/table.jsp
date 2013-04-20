@@ -44,24 +44,24 @@
           <ol id="road">
             <li id="start_road">
               <span class="accessibility">Startfeld</span>
+              <span id="player1">
+                <span class="accessibility"><em>Spieler 1</em></span>
+              </span>
+              <span id="player2">
+                <span class="accessibility"><em>Spieler 2</em></span>
+              </span>
             </li>
             <li class="empty_road" id="road_1">
               <span class="accessibility">Feld 2</span>
             </li>
             <li class="oil_road" id="road_2">
               <span class="accessibility">Feld 3</span>
-              <span id="player1">
-                <span class="accessibility"><em>Spieler 1</em></span>
-              </span>
             </li>
             <li class="empty_road" id="road_3">
               <span class="accessibility">Feld 4</span>
             </li>
             <li class="empty_road" id="road_4">
               <span class="accessibility">Feld 5</span>
-              <span id="player2">
-                <span class="accessibility"><em>Spieler 2</em></span>
-              </span>
             </li>
             <li class="oil_road" id="road_5">
               <span class="accessibility">Feld 6</span>
@@ -100,6 +100,7 @@
        */
     
     var positionMap =  {"0" : "#start_road", "1" : "#road_1", "2" : "#road_2", "3" : "#road_3", "4" : "#road_4", "5" : "#road_5", "6" : "#finish_road"};
+    var currentPlayerPosition = [0,0];
       
     function performRequest(callback) {
       $.post(window.location.href, function(data) {
@@ -130,16 +131,23 @@
         $("#computerScore").html(data.player2DiceResult);
         $("#diceImage").attr("src","img/wuerfel"+data.player1DiceResult+".png");
         $("#player1").fadeOut(700, function() {
-          $("#player1").appendTo(positionMap[data.player1DiceResult]);
+          $("#player1").appendTo(positionMap[currentPlayerPosition[0] + data.player1DiceResult]);
+          currentPlayerPosition[0] = currentPlayerPosition[0] + data.player1DiceResult;
           $("#player1").fadeIn(700, function() {
-            $("#player2").fadeOut(700, function() {
-              $("#player2").appendTo(positionMap[data.player2DiceResult]);
-              $("#player2").fadeIn(700);
-              completeAnimation();
-            })
+            if (currentPlayerPosition[0]!= data.player1Position) {
+              $("#player1").fadeOut(700, function() {
+                $("#player1").appendTo(positionMap[data.player1Position]);
+                currentPlayerPosition[0] = data.player1Position;
+                $("#player1").fadeIn(700);
+              });
+            }
           });
-        })
-
+          $("#player2").fadeOut(700, function() {
+            $("#player2").appendTo(positionMap[data.player2DiceResult]);
+            $("#player2").fadeIn(700);
+            completeAnimation();
+          });
+        });
       });
       return false;
     });
