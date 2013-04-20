@@ -39,9 +39,12 @@ public class Game {
         currentPlayer.setDiceResult((int)(Math.random()*3+1));
         currentPlayer.setPosition(currentPlayer.getPositon()+currentPlayer.getDiceResult());
         if(currentPlayer.getPositon()== 2 || currentPlayer.getPositon() == 5){
-        resetPlayer(currentPlayer);
+            resetPlayer(currentPlayer);
         }
         checkFinish(currentPlayer);
+    }
+    else{
+        currentPlayer.setDiceResult(0);
     }
     //else: already finished the game
   }
@@ -81,7 +84,7 @@ public class Game {
       if(!isFinished()){
         lastTime = System.currentTimeMillis() - startTime;
       }
-      return format.format(getLastTime());
+      return format.format(lastTime);
   }
 
   public Player getPlayer1() {
@@ -96,7 +99,4 @@ public class Game {
     return finished;
   }
   
-  private long getLastTime(){
-      return lastTime;
-  }
 }
