@@ -1,4 +1,5 @@
 <jsp:useBean id="player1" scope ="session" class="Beans.Player" />
+<jsp:useBean id="player2" scope ="session" class="Beans.Player" />
 <jsp:useBean id="game" scope ="session" class="Beans.Game" />
 
 <?xml version="1.0" encoding="ISO-8859-1"?>
@@ -28,15 +29,15 @@
         <div class="info">
           <h2>Spielinformationen</h2>
           <table summary="Diese Tabelle zeigt Informationen zum aktuellen Spiel">
-            <tr><th id="leaderLabel" class="label">F&uuml;hrender</th><td id="leader" class="data">Super C</td></tr>
-            <tr><th id="roundLabel" class="label">Runde</th><td id="round" class="data">0</td></tr>
-            <tr><th id="timeLabel" class="label">Zeit</th><td id="time" class="data">00:00</td></tr>
-            <tr><th id="computerScoreLabel" class="label">W&uuml;rfelergebnis <em>Super C</em></th><td id="computerScore" class="data">3</td></tr>
+            <tr><th id="leaderLabel" class="label">F&uuml;hrender</th><td id="leader" class="data">mehrere</td></tr>
+            <tr><th id="roundLabel" class="label">Runde</th><td id="round" class="data">1</td></tr>
+            <tr><th id="timeLabel" class="label">Zeit</th><td id="time" class="data">02:30</td></tr>
+            <tr><th id="computerScoreLabel" class="label">W&uuml;rfelergebnis <em><%=player2.getPlayerName()%></em></th><td id="computerScore" class="data">3</td></tr>
           </table>  
           <h2>Spieler</h2>
           <table summary="Diese Tabelle listet die Namen der Spieler auf">
             <tr><th id="player1NameLabel" class="label">Spieler 1</th><td id="player1Name" class="data"><%=player1.getPlayerName()%></td></tr>
-            <tr><th id="player2NameLabel" class="label">Spieler 2</th><td id="player2Name" class="data">Super C</td></tr>
+            <tr><th id="player2NameLabel" class="label">Spieler 2</th><td id="player2Name" class="data"><%=player2.getPlayerName()%></td></tr>
           </table>    	  
         </div>
         <div class="field">
