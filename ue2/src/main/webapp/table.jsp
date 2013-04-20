@@ -78,19 +78,12 @@
             <img id="diceImage" src="img/wuerfel1.png" alt="W&uuml;rfel mit einer Eins" />	
           </a>
         </div>
-        
-        <button onclick="log()">Hi</button>
-
       </div>
     </div>
     <div id="footer">
       &copy; 2013 Formel 0
     </div>
   </div>
-  <form action="table" method="post" id="hidden_form"> 
-      <div><input type="hidden" value="xxxx" id="post_param" name="name"/></div>
-  </form>
-
   <script type="text/javascript">
     //<![CDATA[
       
@@ -105,9 +98,12 @@
        * 1.) Serverseitig Session handeln
        * 2.) neues spiel macht einen reset
        */
-    
-    function log() {
-      $("#hidden_form").submit()
+      
+    function performRequest(callback) {
+      $.post(window.location.href, function(data) {
+        console.log(data);
+        callback(data);
+      });
     }
     
     // call this function once before starting the animations
@@ -125,9 +121,12 @@
     
     $("#dice").click(function() {   
       prepareAnimation();
-      $("#player1").fadeOut(700, function() {
-        $("#player1").appendTo("#start_road");
-        $("#player1").fadeIn(700,completeAnimation);
+      performRequest(function(data) {
+        $("#time").html(data.gameTime);
+        $("#player1").fadeOut(700, function() {
+          $("#player1").appendTo("#start_road");
+          $("#player1").fadeIn(700,completeAnimation);
+        })
       });
       return false;
     });

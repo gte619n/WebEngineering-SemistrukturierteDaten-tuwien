@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.codehaus.jackson.JsonGenerator;
+import org.codehaus.jackson.JsonFactory;
 
 public class TableServlet extends HttpServlet {
   private Player player1 = null;
@@ -36,12 +38,27 @@ public class TableServlet extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    player1.setPlayerName(request.getParameter("name").toString());
-    processRequest(request, response);
+
+    // prepare request
+    response.setContentType("application/json");
+    response.setCharacterEncoding("UTF-8");
+
+    // set up JSON writer
+    JsonFactory jsonFactory = new JsonFactory();
+    JsonGenerator jsonResponse = jsonFactory.createJsonGenerator(response.getWriter());
+    jsonResponse.writeStartObject();
+
+    //JSON Body
+    jsonResponse.writeStringField("gameTime", game.getTime());
+
+    // end JSON writer
+    jsonResponse.writeEndObject();
+    jsonResponse.close();
+
   }
 
   @Override
   public String getServletInfo() {
-    return "Short description";
+    return "Handles Table Requests";
     }
   }
