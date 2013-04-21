@@ -165,7 +165,7 @@
           $("#round").html(data.gameRound);
           $("#computerScore").html(data.player2DiceResult);
           $("#diceImage").attr("src","img/wuerfel"+data.player1DiceResult+".png");
-          $("#diceImage").attr("alt","Würfel mit einer "+altTextMap[data.player1DiceResult]);
+          $("#diceImage").attr("alt","W&uuml;rfel mit einer "+altTextMap[data.player1DiceResult]);
           movePlayer('#player1', 0, data.player1DiceResult, data.player1Position, function() {
             movePlayer('#player2', 1, data.player2DiceResult, data.player2Position, function() {
               if (data.gameFinished == "true")
