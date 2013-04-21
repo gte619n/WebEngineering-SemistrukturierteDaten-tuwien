@@ -76,7 +76,7 @@
           <h2 class="accessibility">W&uuml;rfelbereich</h2>
           <span class="accessibility">An der Reihe ist</span><div id="currentPlayerName"><%=player1.getPlayerName()%></div>
           <a id="dice" href="#" tabindex="4">
-            <img id="diceImage" src="img/wuerfel0.png" alt="W&uuml;rfel mit einer Eins" />	
+            <img id="diceImage" src="img/wuerfel0.png" alt="W&uuml;rfel mit einer null" />	
           </a>
         </div>
       </div>
@@ -101,6 +101,8 @@
        */
     
     var positionMap =  {"0" : "#start_road", "1" : "#road_1", "2" : "#road_2", "3" : "#road_3", "4" : "#road_4", "5" : "#road_5", "6" : "#finish_road"};
+    var altTextMap =  {"0" : "null", "1" : "eins", "2" : "zwei", "3" : "drei"};
+    
     var currentPlayerPosition = [0,0];
     var gameFinished = false;
     var moveFinished = true;
@@ -157,11 +159,13 @@
         moveFinished = false;
         prepareAnimation();
         performRequest(function(data) {
+          
           $("#leader").html(data.gameLeader);
           $("#time").html(data.gameTime);
           $("#round").html(data.gameRound);
           $("#computerScore").html(data.player2DiceResult);
           $("#diceImage").attr("src","img/wuerfel"+data.player1DiceResult+".png");
+          $("#diceImage").attr("alt","Würfel mit einer "+altTextMap[data.player1DiceResult]);
           movePlayer('#player1', 0, data.player1DiceResult, data.player1Position, function() {
             movePlayer('#player2', 1, data.player2DiceResult, data.player2Position, function() {
               if (data.gameFinished == "true")
