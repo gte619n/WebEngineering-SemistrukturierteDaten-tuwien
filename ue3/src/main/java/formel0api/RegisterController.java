@@ -50,41 +50,6 @@ public class RegisterController {
     }
 
    public String register() throws ValidatorException{
- 
-   //validation
-     if(!registerPlayer.getFirstname().matches("[a-zA-Z]+")){
-         FacesMessage msg = new FacesMessage(
-            FacesMessage.SEVERITY_WARN,"Invalid Firstname!", null);
-            throw new ValidatorException(msg);
-     }
-     if(!registerPlayer.getLastname().matches("[a-zA-Z]+")){
-             FacesMessage msg = new FacesMessage(
-            FacesMessage.SEVERITY_WARN,"Invalid Lastname!", null);
-            throw new ValidatorException(msg);
-     }
-    
-     if(!registerPlayer.getSex().matches("[a-zA-Z]+")){
-             FacesMessage msg = new FacesMessage(
-            FacesMessage.SEVERITY_WARN,"Invalid Sex!", null);
-            throw new ValidatorException(msg);
-     }
-     if(!registerPlayer.getUsername().matches("[a-zA-Z]+")){
-            FacesMessage msg = new FacesMessage(
-            FacesMessage.SEVERITY_WARN,"Invalid Username!", null);
-            throw new ValidatorException(msg);
-     }
-    
-    if(!registerPlayer.getUsername().matches("[a-zA-Z]+")){
-             FacesMessage msg = new FacesMessage(
-            FacesMessage.SEVERITY_WARN,"Invalid Password!", null);
-            throw new ValidatorException(msg);
-     } 
-     if(!registerPlayer.getPassword().matches("^(?=.*\\d)(?=.*[a-zA-Z]).{2,}$")){
-             FacesMessage msg = new FacesMessage(
-            FacesMessage.SEVERITY_WARN,"Invalid Password!", null);
-            throw new ValidatorException(msg);
-     }
-     
      //Wenn Validierung erfolgreich...
      //Player erzeugen und Attribute setzen.
      Player player = new Player();
@@ -98,7 +63,7 @@ public class RegisterController {
      //Zur ArrayList
      registeredPlayer.add(player);
 
-     return "/login";
+     return "/login.xhtml";
    }
 
    public String login(){
@@ -112,20 +77,60 @@ public class RegisterController {
        }else{
            return "/login.xhtml";
        }
-        return "/table.html";
+        return "/table.xhtml";
    }
    
+   public void validateFirstname(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
+       String firstname = (String)value; 
+        if(!firstname.matches("[a-zA-Z]+")){
+         FacesMessage msg = new FacesMessage(
+            FacesMessage.SEVERITY_WARN,"Invalid Firstname!", null);
+            throw new ValidatorException(msg);
+     }
+   }
+   public void validateLastname(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
+       String lastname = (String)value; 
+       if(!lastname.matches("[a-zA-Z]+")){
+             FacesMessage msg = new FacesMessage(
+            FacesMessage.SEVERITY_WARN,"Invalid Lastname!", null);
+            throw new ValidatorException(msg);
+     }
+   }
    public void validateBirthdate(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
-       
        String birthday = (String)value; 
-       
        if(!birthday.matches("^((0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)[0-9][0-9])?$")){
             FacesMessage msg = new FacesMessage(
-            FacesMessage.SEVERITY_WARN,"Invalid Birthdate!", null);
+            FacesMessage.SEVERITY_WARN, "Invalid Birthdate", null);
             throw new ValidatorException(msg);
      }  
    }
    
+   public void validateSex(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
+       String sex = (String)value; 
+        if(!sex.matches("[a-zA-Z]+")){
+         FacesMessage msg = new FacesMessage(
+            FacesMessage.SEVERITY_WARN,"Invalid Firstname!", null);
+            throw new ValidatorException(msg);
+     }
+   }
+   
+      public void validateUsername(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
+       String username = (String)value; 
+          if(!username.matches("[a-zA-Z]+")){
+            FacesMessage msg = new FacesMessage(
+            FacesMessage.SEVERITY_WARN,"Invalid Username!", null);
+            throw new ValidatorException(msg);
+     }
+    
+   }
+   public void validatePassword(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
+       String password = (String)value; 
+       if(!password.matches("^(?=.*\\d)(?=.*[a-zA-Z]).{2,}$")){
+             FacesMessage msg = new FacesMessage(
+            FacesMessage.SEVERITY_WARN,"Invalid Password!", null);
+            throw new ValidatorException(msg);
+     }
+        }
 
     public Player getLoginPlayer() {
         return loginPlayer;
