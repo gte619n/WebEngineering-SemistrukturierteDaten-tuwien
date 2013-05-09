@@ -11,6 +11,7 @@
 package formel0api;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,21 +26,40 @@ public class Player {
     /**
      * The name of this user
      */
-    private String name;
+    private String username;
     /**
      * The current position of the user's car
      */
     private int position = 0;
 
+    private String firstname;
+    
+    private String lastname;
+    
+    private String birthdate;
+    
+    private String sex;
+    
+    private String password;
+    
+    
+    
+    
     /**
      * Initializes a {@link Player} with the specified
      * <code>name</code>.
      *
      * @param name to set
      */
-    public Player(String name) {
+    public Player(String firstname, String lastname, String birthdate, String sex, String username, String password) {
         super();
-        this.name = name;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.birthdate = birthdate;
+        this.sex = sex;
+        this.username = username;
+        this.password = password;
+                
         setPosition(0);
     }
 
@@ -48,8 +68,8 @@ public class Player {
      *
      * @return the name
      */
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
     /**
@@ -83,5 +103,28 @@ public class Player {
             return history.get(index);
         }
         return -1;
+      
     }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public String getBirthdate() {
+        return birthdate;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+    
+    
 }
