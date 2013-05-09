@@ -18,33 +18,43 @@ xmlns:f="http://java.sun.com/jsf/core">
 
     <h:form id="form">
       <h3>#{msg.register_personaldata}</h3>
-
       <fieldset>
+        <h:outputLabel value="#{msg.register_firstname}" for="firstname"  class="registerform" />
+        <h:inputText id="firstname" value="#{controller.registerPlayer.firstname}" required="true" label="#{msg.register_firstname}" />
+        <h:message for="firstname" style="color:red" />
+        <br />
 
-        <h:outputLabel value="#{msg.register_firstname}" for="firstname"/>
-        <h:inputText id="firstname" value="#{controller.registerPlayer.firstname}" required="true" label="#{msg.register_firstname}" tabindex="3" /><br />
+        <h:outputLabel value="#{msg.register_lastname}" for="lastname" class="registerform" />
+        <h:inputText id="lastname" value="#{controller.registerPlayer.lastname}" required="true" label="#{msg.register_lastname}" />
+        <h:message for="lastname" style="color:red" />
+        <br />
 
-        <h:outputLabel value="#{msg.register_lastname}" for="lastname"/>
-        <h:inputText id="lastname" value="#{controller.registerPlayer.lastname}" required="true" label="#{msg.register_lastname}" tabindex="4" /><br />
 
-        <h:outputLabel value="#{msg.register_birthdate}" for="birthdate"/>
-        <h:inputText id="birthdate" value="#{controller.registerPlayer.birthdate}" required="true" label="#{msg.register_birthdate}" tabindex="5" /><br />
+        <h:outputLabel value="#{msg.register_birthdate}" for="birthdate" class="registerform" />
+        <h:inputText id="birthday" value="#{controller.registerPlayer.birthdate}" required="true" label="#{msg.register_birthdate}" />
+        <h:message for="birthday" style="color:red" />
+        <br />
 
-        <h:outputLabel value="#{msg.register_sex}" for="sex"/>
-        <h:selectOneMenu value="#{controller.registerPlayer.sex}">
+        <h:outputLabel value="#{msg.register_sex}" for="sex" class="registerform" />
+        <h:selectOneMenu id="sex" value="#{controller.registerPlayer.sex}">
             <f:selectItem itemValue="male" itemLabel="#{msg.register_male}" />
             <f:selectItem itemValue="female" itemLabel="#{msg.register_female}" />
         </h:selectOneMenu>
 
         <h3>#{msg.register_logindata}</h3>
 
-        <h:outputLabel value="#{msg.register_username}" for="username"/>
-        <h:inputText id="username" value="#{controller.registerPlayer.username}" required="true" label="#{msg.register_username}" tabindex="7" /><br />
+        <h:outputLabel value="#{msg.register_username}" for="username" class="registerform" />
+        <h:inputText id="username" value="#{controller.registerPlayer.username}" required="true" label="#{msg.register_username}" />
+        <h:message for="username" style="color:red" />
+        <br />
 
-        <h:outputLabel value="#{msg.register_password}" for="password"/>
-        <h:inputText id="password" value="#{controller.registerPlayer.password}" required="true" label="#{msg.register_password}" tabindex="8" /><br />
+        <h:outputLabel value="#{msg.register_password}" for="password" class="registerform" />
+        <h:inputText id="password" value="#{controller.registerPlayer.password}" required="true" label="#{msg.register_password}" />
+        <h:message for="password" style="color:red" />
+        <br />
+
         <p>
-          <h:commandButton id="login" value="#{msg.register_button}" action="#{controller.register}"/>
+          <h:commandButton id="submit" value="#{msg.register_button}" action="#{controller.register}"/>
         </p>
       </fieldset>
     </h:form>

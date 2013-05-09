@@ -110,14 +110,14 @@ div#footer {
     float: right;
 }
 
-label.registerform {
-    float:left;
-    width: 10em;
-}
-
 fieldset {
     display: inline;
     border: none;
+}
+
+label.registerform {
+    width: 10em;
+    float: left;
 }
 
 .formblock input[type=submit] {
