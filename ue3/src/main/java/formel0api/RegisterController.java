@@ -75,7 +75,13 @@ public class RegisterController {
             FacesMessage.SEVERITY_WARN,"Invalid Username!", null);
             throw new ValidatorException(msg);
      }
-     if(!registerPlayer.getPassword().matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{2,})")){
+    
+    if(!registerPlayer.getUsername().matches("[a-zA-Z]+")){
+             FacesMessage msg = new FacesMessage(
+            FacesMessage.SEVERITY_WARN,"Invalid Password!", null);
+            throw new ValidatorException(msg);
+     } 
+     if(!registerPlayer.getPassword().matches("^(?=.*\\d)(?=.*[a-zA-Z]).{2,}$")){
              FacesMessage msg = new FacesMessage(
             FacesMessage.SEVERITY_WARN,"Invalid Password!", null);
             throw new ValidatorException(msg);
