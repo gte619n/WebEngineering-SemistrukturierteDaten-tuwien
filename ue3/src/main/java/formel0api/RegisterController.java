@@ -26,7 +26,7 @@ import javax.faces.bean.SessionScoped;
  * @author Matthes Laptop
  */
 
-@ManagedBean
+@ManagedBean(name="controller")
 @SessionScoped
 public class RegisterController {
     ArrayList<Player> registeredPlayer = new ArrayList<Player>();
