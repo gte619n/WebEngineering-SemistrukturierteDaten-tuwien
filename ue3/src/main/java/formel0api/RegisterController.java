@@ -16,63 +16,77 @@
 package formel0api;
 
 import java.util.ArrayList;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 
 
 /**
  *
  * @author Matthes Laptop
  */
+
+@ManagedBean
+@SessionScoped
 public class RegisterController {
-    ArrayList<Player> registeredPlayer;
+    ArrayList<Player> registeredPlayer = new ArrayList<Player>();
+    
+    @ManagedProperty(value="#{loginPlayer}")
+    Player loginPlayer = new Player();
+    
+    @ManagedProperty(value="#{registerPlayer}")
+    Player registerPlayer = new Player();
     
     
     public RegisterController(){
-        registeredPlayer = new ArrayList<Player>();
+        
     }
     
     
    public boolean register(String firstname, String lastname, String birthdate, String sex, String username, String password){
-       
+ 
    //validation
-     if(!firstname.matches("[a-zA-Z]")){
+     if(!registerPlayer.getFirstname().matches("[a-zA-Z]")){
          return false;
      }
-     if(!lastname.matches("[a-zA-Z]")){
+     if(!registerPlayer.getLastname().matches("[a-zA-Z]")){
          return false;
      }
-     if(!birthdate.matches("^((0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)[0-9][0-9])?$")){
+     if(!registerPlayer.getBirthdate().matches("^((0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)[0-9][0-9])?$")){
          return false;
      }    
-     if(!sex.matches("[a-zA-Z]")){
+     if(!registerPlayer.getSex().matches("[a-zA-Z]")){
          return false;
      }    
-     if(!username.matches("[a-zA-Z]")){
+     if(!registerPlayer.getUsername().matches("[a-zA-Z]")){
          return false;
      }        
-     if(!password.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{2,})")){
+     if(!registerPlayer.getPassword().matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{2,})")){
          return false;
      }
-              
+     //Wenn Validierung erfolgreich         
+     //Player erzeugen und Attribute setzen.
      Player player = new Player();
-     player.setFirstname(firstname);
-     player.setLastname(lastname);
-     player.setBirthdate(birthdate);
-     player.setSex(sex);
-     player.setUsername(username);
-     player.setPassword(password);
+     player.setFirstname(registerPlayer.getFirstname());
+     player.setLastname(registerPlayer.getLastname());
+     player.setBirthdate(registerPlayer.getBirthdate());
+     player.setSex(registerPlayer.getSex());
+     player.setUsername(registerPlayer.getUsername());
+     player.setPassword(registerPlayer.getPassword());
     
+     //Zur ArrayList
      registeredPlayer.add(player);
     
      return true;
    }
    
-   public boolean login(String username,String password){
+   public String login(){
        for(Player player : registeredPlayer){
-            if(!(player.getUsername().equals(username) && player.getPassword().equals(password))){
-                return false;
+            if(!(player.getUsername().equals(loginPlayer.getUsername()) && player.getPassword().equals(loginPlayer.getPassword()))){
+                return "/login.xhtml";
             }
         }
-        return true;
+        return "/table.xhtml";
    } 
     
 }

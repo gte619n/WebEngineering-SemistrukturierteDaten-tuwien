@@ -18,7 +18,7 @@ import java.util.List;
  */
 
 
-@javax.faces.bean.ManagedBean
+@javax.faces.bean.ManagedBean(name="player")
 @javax.faces.bean.SessionScoped
 
 public class Player {
@@ -46,10 +46,7 @@ public class Player {
     
     private String password;
     
-    
-    
-    
-    /**
+     /**
      * Initializes a {@link Player} with the specified
      * <code>name</code>.
      *
