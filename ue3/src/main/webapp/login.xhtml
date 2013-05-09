@@ -6,6 +6,9 @@ xmlns:h="http://java.sun.com/jsf/html"
 xmlns:f="http://java.sun.com/jsf/core">
 <h:body>
   <ui:composition template="./login_template.xhtml">
+    <ui:define name="navigation">
+      <li><a id="register" href="register.xhtml">#{msg.login_register}</a></li>
+    </ui:define>
     <ui:define name="content">
       <h2>#{msg.login_title}</h2>
       <p>#{msg.login_description}</p>
