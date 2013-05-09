@@ -32,16 +32,17 @@ public class RegisterController {
     ArrayList<Player> registeredPlayer = new ArrayList<Player>();
     
     @ManagedProperty(value="#{loginPlayer}")
-    Player loginPlayer = new Player();
+    private Player loginPlayer = new Player();
     
     @ManagedProperty(value="#{registerPlayer}")
-    Player registerPlayer = new Player();
+    private Player registerPlayer = new Player();
     
+    @ManagedProperty(value="#{loginFailed}")
+    private boolean loginFailed = false;
     
     public RegisterController(){
         
     }
-    
     
    public boolean register(String firstname, String lastname, String birthdate, String sex, String username, String password){
  
@@ -64,7 +65,7 @@ public class RegisterController {
      if(!registerPlayer.getPassword().matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{2,})")){
          return false;
      }
-     //Wenn Validierung erfolgreich         
+     //Wenn Validierung erfolgreich...         
      //Player erzeugen und Attribute setzen.
      Player player = new Player();
      player.setFirstname(registerPlayer.getFirstname());
@@ -88,5 +89,29 @@ public class RegisterController {
         }
         return "/table.xhtml";
    } 
-    
+
+    public Player getLoginPlayer() {
+        return loginPlayer;
+    }
+
+    public void setLoginPlayer(Player loginPlayer) {
+        this.loginPlayer = loginPlayer;
+    }
+
+    public Player getRegisterPlayer() {
+        return registerPlayer;
+    }
+
+    public void setRegisterPlayer(Player registerPlayer) {
+        this.registerPlayer = registerPlayer;
+    }
+
+    public boolean isLoginFailed() {
+        return loginFailed;
+    }
+
+    public void setLoginFailed(boolean loginFailed) {
+        this.loginFailed = loginFailed;
+    }
+      
 }
