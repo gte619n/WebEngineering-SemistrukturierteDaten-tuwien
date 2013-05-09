@@ -53,7 +53,13 @@ public class RegisterController {
          return false;
      }
               
-     Player player = new Player(firstname, lastname, birthdate, sex, username, password);
+     Player player = new Player();
+     player.setFirstname(firstname);
+     player.setLastname(lastname);
+     player.setBirthdate(birthdate);
+     player.setSex(sex);
+     player.setUsername(username);
+     player.setPassword(password);
     
      registeredPlayer.add(player);
     
