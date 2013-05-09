@@ -11,12 +11,16 @@
 package formel0api;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
  * Class representing a player playing in a {@link Game}.
  */
+
+
+@javax.faces.bean.ManagedBean
+@javax.faces.bean.SessionScoped
+
 public class Player {
 
     /**
@@ -51,15 +55,8 @@ public class Player {
      *
      * @param name to set
      */
-    public Player(String firstname, String lastname, String birthdate, String sex, String username, String password) {
-        super();
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.birthdate = birthdate;
-        this.sex = sex;
-        this.username = username;
-        this.password = password;
-                
+    public Player() {
+        super();              
         setPosition(0);
     }
 
@@ -125,6 +122,32 @@ public class Player {
     public String getPassword() {
         return password;
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    
     
     
 }
