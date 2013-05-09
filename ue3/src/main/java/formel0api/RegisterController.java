@@ -17,8 +17,6 @@ package formel0api;
 
 import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ApplicationScoped;
 
 
@@ -34,15 +32,19 @@ public class RegisterController {
 
 
     //@ManagedProperty(value="#{loginPlayer}")
-    private Player loginPlayer = new Player();
+    private Player loginPlayer;
 
-    @ManagedProperty(value="#{registerPlayer}")
+    //@ManagedProperty(value="#{registerPlayer}")
     private Player registerPlayer;
 
     private boolean loginFailed = false;
 
     public RegisterController(){
         super();
+        registerPlayer = new Player();
+        loginPlayer = new Player();
+        
+        
     }
 
    public boolean register(String firstname, String lastname, String birthdate, String sex, String username, String password){
@@ -83,14 +85,18 @@ public class RegisterController {
    }
 
    public String login(){
-         for(Player player : registeredPlayer){
-            if(!(player.getUsername().equals(loginPlayer.getUsername()) && player.getPassword().equals(loginPlayer.getPassword()))){
-                return "/login.xhtml";
+       if(registeredPlayer.size() > 0){  
+            for(Player player : registeredPlayer){
+                 if(!(player.getUsername().equals(loginPlayer.getUsername()) && player.getPassword().equals(loginPlayer.getPassword()))){
+                    loginFailed = true;
+                    return "/login.xhtml";
+                 }
             }
-        }
-         loginFailed = true;
-         return loginPlayer.getUsername();
-         //return "/login.xhtml";
+       }else{
+           return "/login.xhtml";
+            
+       }
+        return "/table.html";
    }
 
     public Player getLoginPlayer() {

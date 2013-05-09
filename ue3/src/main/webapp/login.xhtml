@@ -14,7 +14,7 @@ xmlns:f="http://java.sun.com/jsf/core">
           <h:outputLabel value="#{msg.login_username}" for="username"/>
           <h:inputText id="username" value="#{controller.loginPlayer.username}" required="true" label="#{msg.login_username}" tabindex="1" />
           <h:outputLabel value="#{msg.login_password}" for="password"/>
-          <h:inputText id="password" value="#{controller.loginPlayer.username}" required="true" label="#{msg.login_password}" tabindex="2" />
+          <h:inputSecret id="password" value="#{controller.loginPlayer.password}" required="true" label="#{msg.login_password}" tabindex="2" />
           <h:commandButton id="login" value="#{msg.login_button}" action="#{controller.login}"/>
           <h:outputText value="#{msg.login_errormsg}" rendered="#{controller.loginFailed}" style="color: red"/>
           <h:messages style="color: red"/>
