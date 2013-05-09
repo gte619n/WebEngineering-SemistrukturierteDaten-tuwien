@@ -32,11 +32,11 @@ xmlns:f="http://java.sun.com/jsf/core">
 
         <h:outputLabel value="#{msg.register_sex}" for="sex"/>
         <h:selectOneMenu value="#{controller.registerPlayer.sex}">
-            <f:selectItem itemValue="male" itemLabel="#{msg.male}" />
-            <f:selectItem itemValue="female" itemLabel="#{msg.female}" />
+            <f:selectItem itemValue="male" itemLabel="#{msg.register_male}" />
+            <f:selectItem itemValue="female" itemLabel="#{msg.register_female}" />
         </h:selectOneMenu>
 
-        <h3>#{msg.logindata}</h3>
+        <h3>#{msg.register_logindata}</h3>
 
         <h:outputLabel value="#{msg.register_username}" for="username"/>
         <h:inputText id="username" value="#{controller.registerPlayer.username}" required="true" label="#{msg.register_username}" tabindex="7" /><br />
