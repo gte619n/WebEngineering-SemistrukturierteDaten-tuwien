@@ -30,22 +30,25 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class RegisterController {
     ArrayList<Player> registeredPlayer = new ArrayList<Player>();
-    
+
+    @ManagedProperty(value="#{test}")
+    private String test = "Hallo Matthes";
+
     @ManagedProperty(value="#{loginPlayer}")
     private Player loginPlayer = new Player();
-    
+
     @ManagedProperty(value="#{registerPlayer}")
     private Player registerPlayer = new Player();
-    
+
     @ManagedProperty(value="#{loginFailed}")
     private boolean loginFailed = false;
-    
+
     public RegisterController(){
-        
+
     }
-    
+
    public boolean register(String firstname, String lastname, String birthdate, String sex, String username, String password){
- 
+
    //validation
      if(!registerPlayer.getFirstname().matches("[a-zA-Z]")){
          return false;
@@ -55,17 +58,17 @@ public class RegisterController {
      }
      if(!registerPlayer.getBirthdate().matches("^((0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)[0-9][0-9])?$")){
          return false;
-     }    
+     }
      if(!registerPlayer.getSex().matches("[a-zA-Z]")){
          return false;
-     }    
+     }
      if(!registerPlayer.getUsername().matches("[a-zA-Z]")){
          return false;
-     }        
+     }
      if(!registerPlayer.getPassword().matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{2,})")){
          return false;
      }
-     //Wenn Validierung erfolgreich...         
+     //Wenn Validierung erfolgreich...
      //Player erzeugen und Attribute setzen.
      Player player = new Player();
      player.setFirstname(registerPlayer.getFirstname());
@@ -74,13 +77,13 @@ public class RegisterController {
      player.setSex(registerPlayer.getSex());
      player.setUsername(registerPlayer.getUsername());
      player.setPassword(registerPlayer.getPassword());
-    
+
      //Zur ArrayList
      registeredPlayer.add(player);
-    
+
      return true;
    }
-   
+
    public String login(){
        for(Player player : registeredPlayer){
             if(!(player.getUsername().equals(loginPlayer.getUsername()) && player.getPassword().equals(loginPlayer.getPassword()))){
@@ -88,7 +91,7 @@ public class RegisterController {
             }
         }
         return "/table.xhtml";
-   } 
+   }
 
     public Player getLoginPlayer() {
         return loginPlayer;
@@ -113,5 +116,13 @@ public class RegisterController {
     public void setLoginFailed(boolean loginFailed) {
         this.loginFailed = loginFailed;
     }
-      
+
+    public String getTest() {
+      return this.test;
+    }
+
+    public void setTest(String test) {
+      this.test = test;
+    }
+
 }
