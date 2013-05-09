@@ -12,7 +12,7 @@ xmlns:f="http://java.sun.com/jsf/core">
       <h:form id="form">
         <fieldset>
           <h:outputLabel value="#{msg.login_username}" for="username"/>
-          <h:inputText id="username" value="#{controller.loginPlayer.username}" required="true" label="#{msg.login_username}" tabindex="1" />
+          <h:inputText id="username" value="#{controller.loginPlayer.username}" required="true" label="#{msg.login_username}" tabindex="1" /><br />
           <h:outputLabel value="#{msg.login_password}" for="password"/>
           <h:inputText id="password" value="#{controller.loginPlayer.username}" required="true" label="#{msg.login_password}" tabindex="2" />
           <h:commandButton id="login" value="#{msg.login_button}" action="#{controller.login}"/>
