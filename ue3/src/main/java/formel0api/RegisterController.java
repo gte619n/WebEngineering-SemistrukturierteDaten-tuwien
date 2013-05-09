@@ -49,17 +49,24 @@ public class RegisterController {
      if(!username.matches("[a-zA-Z]")){
          return false;
      }        
-    if(!password.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{2,})")){
-       return false;
-    }
+     if(!password.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{2,})")){
+         return false;
+     }
               
-    Player player = new Player(firstname, lastname, birthdate, sex, username, password);
+     Player player = new Player(firstname, lastname, birthdate, sex, username, password);
     
-    registeredPlayer.add(player);
+     registeredPlayer.add(player);
     
-    return true;
+     return true;
    }
-    
-    
+   
+   public boolean login(String username,String password){
+       for(Player player : registeredPlayer){
+            if(!(player.getUsername().equals(username) && player.getPassword().equals(password))){
+                return false;
+            }
+        }
+        return true;
+   } 
     
 }
