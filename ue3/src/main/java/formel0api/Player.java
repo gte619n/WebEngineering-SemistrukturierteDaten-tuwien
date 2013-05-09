@@ -16,6 +16,11 @@ import java.util.List;
 /**
  * Class representing a player playing in a {@link Game}.
  */
+
+
+@javax.faces.bean.ManagedBean
+@javax.faces.bean.SessionScoped
+
 public class Player {
 
     /**
@@ -25,21 +30,33 @@ public class Player {
     /**
      * The name of this user
      */
-    private String name;
+    private String username;
     /**
      * The current position of the user's car
      */
     private int position = 0;
 
+    private String firstname;
+    
+    private String lastname;
+    
+    private String birthdate;
+    
+    private String sex;
+    
+    private String password;
+    
+    
+    
+    
     /**
      * Initializes a {@link Player} with the specified
      * <code>name</code>.
      *
      * @param name to set
      */
-    public Player(String name) {
-        super();
-        this.name = name;
+    public Player() {
+        super();              
         setPosition(0);
     }
 
@@ -48,8 +65,8 @@ public class Player {
      *
      * @return the name
      */
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
     /**
@@ -83,5 +100,54 @@ public class Player {
             return history.get(index);
         }
         return -1;
+      
     }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public String getBirthdate() {
+        return birthdate;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    
+    
+    
 }
