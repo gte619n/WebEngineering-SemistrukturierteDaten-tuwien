@@ -1,19 +1,64 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core">
 
-    <body>
+<body>
 
-        <ui:composition template="./login_template.xhtml">
+  <ui:composition template="./login_template.xhtml">
 
-            <ui:define name="content">
-                <h1>Register, Bitch</h1>
-            </ui:define>
+  <ui:define name="content">
+  <h2>Registrieren</h2>
+    <p>Bitte f&uuml;llen Sie das unten stehende Formular aus!</p>
 
-        </ui:composition>
+  <form id="form" action="#">
+    <h3>Persönliche Daten</h3>
 
-    </body>
+    <fieldset>
+      <label for="firstname" class="registerform">Vorname</label>
+      <input type="text" id="firstname" name="firstname" tabindex="3" />
+      <span id="msg_username" class="validation_error hide">Vorname</span>
+      <br />
+
+      <label for="lastname" class="registerform">Nachname</label>
+      <input type="text" id="lastname" name="lastname" tabindex="4" />
+      <span id="msg_username" class="validation_error hide">Nachname</span>
+      <br />
+
+      <label for="birthday" class="registerform">Geburtstag</label>
+      <input type="text" id="birthday" name="birthday" tabindex="5" />
+      <span id="msg_birthday" class="validation_error hide">Der Verwenden Sie bitte folgendes Datumsformat: dd.mm.yyyy (z.B. 24.12.2012).</span>
+      <br />
+
+      <label for="sex" class="registerform">Geschlecht</label>
+      <select id="sex" name="sex" tabindex="6">
+        <option value="f">weiblich</option>
+        <option value="m">m&auml;nnlich</option>
+      </select><br />
+    </fieldset>
+
+    <h3>Login Daten</h3>
+    <fieldset>
+      <label for="username" class="registerform">Benutzername</label>
+      <input type="text" id="username" name="username" tabindex="7" />
+      <span id="msg_username" class="validation_error hide">Der Benutzername muss mindestens 4 Zeichen und darf maximal 8 Zeichen enthalten.</span>
+      <br />
+
+      <label for="password" class="registerform">Passwort</label>
+      <input type="password" id="password" name="password" tabindex="8" />
+      <span id="msg_password" class="validation_error hide">Das Passwort muss mindestens 4 Zeichen und darf maximal 8 Zeichen enthalten.</span>
+      <br />
+    </fieldset>
+
+    <p>
+      <input id="submit" type="submit" value="Registrieren" tabindex="9" />
+    </p>
+  </form>
+  </ui:define>
+
+  </ui:composition>
+
+</body>
 </html>

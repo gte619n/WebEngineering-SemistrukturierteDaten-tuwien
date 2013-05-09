@@ -4,10 +4,10 @@
 body  {
     font: 100% Arial, Helvetica, Clear, sans-serif;
     background-color: #AAAAAA;
-    margin: 0; 
+    margin: 0;
     padding: 0;
     text-align: left;
-    color: #000000;  
+    color: #000000;
 }
 
 h1, h2 {
@@ -116,6 +116,7 @@ label.registerform {
 }
 
 fieldset {
+    display: inline;
     border: none;
 }
 

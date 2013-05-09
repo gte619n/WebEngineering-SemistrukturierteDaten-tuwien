@@ -21,10 +21,6 @@
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>/login/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
     <servlet-name>Table</servlet-name>
     <url-pattern>/table</url-pattern>
   </servlet-mapping>
