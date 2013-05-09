@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ApplicationScoped;
 
 
 /**
@@ -27,24 +28,21 @@ import javax.faces.bean.SessionScoped;
  */
 
 @ManagedBean(name="controller")
-@SessionScoped
+@ApplicationScoped
 public class RegisterController {
-    ArrayList<Player> registeredPlayer = new ArrayList<Player>();
+    private ArrayList<Player> registeredPlayer = new ArrayList<Player>();
 
-    @ManagedProperty(value="#{test}")
-    private String test = "Hallo Matthes";
 
-    @ManagedProperty(value="#{loginPlayer}")
-    private Player loginPlayer = new Player();
+    // @ManagedProperty(value="#{loginPlayer}")
+    private Player loginPlayer;
 
     @ManagedProperty(value="#{registerPlayer}")
-    private Player registerPlayer = new Player();
+    private Player registerPlayer;
 
-    @ManagedProperty(value="#{loginFailed}")
     private boolean loginFailed = false;
 
     public RegisterController(){
-
+        super();
     }
 
    public boolean register(String firstname, String lastname, String birthdate, String sex, String username, String password){
@@ -116,13 +114,4 @@ public class RegisterController {
     public void setLoginFailed(boolean loginFailed) {
         this.loginFailed = loginFailed;
     }
-
-    public String getTest() {
-      return this.test;
-    }
-
-    public void setTest(String test) {
-      this.test = test;
-    }
-
 }

@@ -1,4 +1,4 @@
-package com.mkyong.common;
+package formel0api;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -10,10 +10,10 @@ public class HelloBean implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  private String name;
+  private String name = "lololooolll";
 
   public String getName() {
-    return name;
+    return "lajdsölfkjsaöfdkjaökj";
   }
   public void setName(String name) {
     this.name = name;

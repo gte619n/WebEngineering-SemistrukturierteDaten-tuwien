@@ -4,15 +4,23 @@
 xmlns:ui="http://java.sun.com/jsf/facelets"
 xmlns:h="http://java.sun.com/jsf/html"
 xmlns:f="http://java.sun.com/jsf/core">
-<body>
+<h:body>
   <ui:composition template="./login_template.xhtml">
-  <ui:define name="content">
-  <h2>#{msg.login_title}</h2>
-  <p>#{msg.login_description}</p>
-  <h:form id="form">
-    <h:outputText value="#{controller.test}" />
-  </h:form>
-</ui:define>
-</ui:composition>
-</body>
+    <ui:define name="content">
+      <h2>#{msg.login_title}</h2>
+      <p>#{msg.login_description}</p>
+      <h:form id="form">
+        <fieldset>
+          <h:outputLabel value="#{msg.login_username}" for="username"/>
+          <h:inputText id="username" value="#{controller.loginPlayer.username}" required="true" label="#{msg.login_username}" tabindex="1" />
+          <h:outputLabel value="#{msg.login_password}" for="password"/>
+          <h:inputText id="password" value="#{controller.loginPlayer.username}" required="true" label="#{msg.login_password}" tabindex="2" />
+          <h:commandButton id="login" value="#{msg.login_button}" action="#{controller.login}"/>
+          <h:outputText value="#{msg.login_errormsg}" rendered="#{controller.loginFailed}" style="color: red"/>
+          <h:messages style="color: red"/>
+        </fieldset>
+      </h:form>
+    </ui:define>
+  </ui:composition>
+</h:body>
 </html>

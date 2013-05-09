@@ -12,15 +12,17 @@ package formel0api;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ApplicationScoped;
 
 /**
  * Class representing a player playing in a {@link Game}.
  */
 
 
-@javax.faces.bean.ManagedBean(name="player")
-@javax.faces.bean.SessionScoped
-
+@ManagedBean(name="player")
+@ApplicationScoped
 public class Player {
 
     /**
@@ -37,15 +39,15 @@ public class Player {
     private int position = 0;
 
     private String firstname;
-    
+
     private String lastname;
-    
+
     private String birthdate;
-    
+
     private String sex;
-    
+
     private String password;
-    
+
      /**
      * Initializes a {@link Player} with the specified
      * <code>name</code>.
@@ -53,7 +55,7 @@ public class Player {
      * @param name to set
      */
     public Player() {
-        super();              
+        super();
         setPosition(0);
     }
 
@@ -63,7 +65,7 @@ public class Player {
      * @return the name
      */
     public String getUsername() {
-        return username;
+        return "loool";
     }
 
     /**
@@ -97,7 +99,7 @@ public class Player {
             return history.get(index);
         }
         return -1;
-      
+
     }
 
     public String getFirstname() {
@@ -143,8 +145,5 @@ public class Player {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
-    
-    
+
 }
