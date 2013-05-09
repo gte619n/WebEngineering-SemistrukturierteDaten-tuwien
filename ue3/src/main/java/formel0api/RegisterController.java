@@ -16,9 +16,10 @@
 package formel0api;
 
 import java.util.ArrayList;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
-
+import javax.faces.validator.ValidatorException;
 
 /**
  *
@@ -29,7 +30,6 @@ import javax.faces.bean.ApplicationScoped;
 @ApplicationScoped
 public class RegisterController {
     private ArrayList<Player> registeredPlayer = new ArrayList<Player>();
-
 
     //@ManagedProperty(value="#{loginPlayer}")
     private Player loginPlayer;
@@ -47,26 +47,38 @@ public class RegisterController {
         
     }
 
-   public boolean register(String firstname, String lastname, String birthdate, String sex, String username, String password){
-
+   public String register(){
+ 
    //validation
-     if(!registerPlayer.getFirstname().matches("[a-zA-Z]")){
-         return false;
+     if(!registerPlayer.getFirstname().matches("[a-zA-Z]+")){
+         FacesMessage msg = new FacesMessage(
+            FacesMessage.SEVERITY_WARN,"Invalid Firstname!", null);
+            throw new ValidatorException(msg);
      }
-     if(!registerPlayer.getLastname().matches("[a-zA-Z]")){
-         return false;
+     if(!registerPlayer.getLastname().matches("[a-zA-Z]+")){
+             FacesMessage msg = new FacesMessage(
+            FacesMessage.SEVERITY_WARN,"Invalid Lastname!", null);
+            throw new ValidatorException(msg);
      }
      if(!registerPlayer.getBirthdate().matches("^((0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)[0-9][0-9])?$")){
-         return false;
+            FacesMessage msg = new FacesMessage(
+            FacesMessage.SEVERITY_WARN,"Invalid Birthdate!", null);
+            throw new ValidatorException(msg);
      }
-     if(!registerPlayer.getSex().matches("[a-zA-Z]")){
-         return false;
+     if(!registerPlayer.getSex().matches("[a-zA-Z]+")){
+             FacesMessage msg = new FacesMessage(
+            FacesMessage.SEVERITY_WARN,"Invalid Sex!", null);
+            throw new ValidatorException(msg);
      }
-     if(!registerPlayer.getUsername().matches("[a-zA-Z]")){
-         return false;
+     if(!registerPlayer.getUsername().matches("[a-zA-Z]+")){
+            FacesMessage msg = new FacesMessage(
+            FacesMessage.SEVERITY_WARN,"Invalid Username!", null);
+            throw new ValidatorException(msg);
      }
      if(!registerPlayer.getPassword().matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{2,})")){
-         return false;
+             FacesMessage msg = new FacesMessage(
+            FacesMessage.SEVERITY_WARN,"Invalid Password!", null);
+            throw new ValidatorException(msg);
      }
      //Wenn Validierung erfolgreich...
      //Player erzeugen und Attribute setzen.
@@ -81,7 +93,8 @@ public class RegisterController {
      //Zur ArrayList
      registeredPlayer.add(player);
 
-     return true;
+     return "/login";
+     
    }
 
    public String login(){
