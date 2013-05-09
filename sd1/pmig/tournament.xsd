@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.dbai.tuwien.ac.at/education/ssd/SS13/uebung/Tournament" xmlns:t="http://www.dbai.tuwien.ac.at/education/ssd/SS13/uebung/Tournament" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xsd:element name="tournament">
+    <xsd:complexType>
+      <xsd:sequence>
+
+        <xsd:element name="players" maxOccurs="1">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="player" maxOccurs="unbounded">
+                <xsd:complexType>
+                  <xsd:all>
+                    <xsd:element name="date-of-birth" type="xsd:date" />
+                    <xsd:element name="gender">
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:enumeration value="MALE"/>
+                          <xsd:enumeration value="FEMALE"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                   </xsd:all>
+                  <xsd:attribute name="username" type="xsd:string" use="required" />
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+
+        <xsd:element name="rounds" maxOccurs="1">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="round" maxOccurs="unbounded">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="game" maxOccurs="unbounded">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="players">
+                            <xsd:complexType>
+                              <xsd:sequence>
+                                <xsd:element name="player" minOccurs="0" maxOccurs="2">
+                                  <xsd:complexType>
+                                    <xsd:attribute name="ref" type="xsd:string" use="required" />
+                                  </xsd:complexType>
+                                </xsd:element>
+                              </xsd:sequence>
+                            </xsd:complexType>
+                          </xsd:element>
+                          <xsd:element name="game-history" minOccurs="0">
+                            <xsd:complexType>
+                              <xsd:sequence>
+                                <xsd:element name="move" maxOccurs="unbounded">
+                                  <xsd:complexType>
+                                    <xsd:attribute name="player" type="xsd:string" use="required" />
+                                    <xsd:attribute name="dots" type="t:diceResult" use="required" />
+                                    <xsd:attribute name="start-point" type="t:fieldPosition" use="required" />
+                                    <xsd:attribute name="end-point" type="t:fieldPosition" use="required" />
+                                  </xsd:complexType>
+                                </xsd:element>
+                              </xsd:sequence>
+                            </xsd:complexType>
+                          </xsd:element>
+                        </xsd:sequence>
+                        <xsd:attribute name="date" type="xsd:date" use="required" />
+                        <xsd:attribute name="status" type="t:statusType" default="planned" use="optional" />
+                        <xsd:attribute name="duration" type="xsd:integer" />
+                        <xsd:attribute name="winner" type="xsd:string" />
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                  <xsd:attribute name="number" type="xsd:integer" use="required" />
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+
+        <xsd:element name="description" type="t:tournamentDescription" minOccurs="0" maxOccurs="1" />
+      </xsd:sequence>
+
+      <xsd:attribute name="start-date" type="xsd:date" use="required" />
+      <xsd:attribute name="end-date" type="xsd:date" use="required" />
+      <xsd:attribute name="registration-deadline" type="xsd:date" use="required" />
+    </xsd:complexType>
+
+  <!-- Keys -->
+
+    <xsd:key name="player-username">
+      <xsd:selector xpath="t:players/t:player" />
+      <xsd:field xpath="@username" />
+    </xsd:key>
+
+    <xsd:keyref name="referenzname" refer="t:player-username">
+      <xsd:selector xpath="t:rounds/t:round/t:game/t:player" />
+      <xsd:field xpath="@ref" />
+    </xsd:keyref>
+
+    <xsd:unique name="game-history-player-username">
+      <xsd:selector xpath="tournament/rounds/round/game/game-history/move" />
+      <xsd:field xpath="@player" />
+    </xsd:unique>
+
+    <xsd:unique name="game-player-username">
+      <xsd:selector xpath="tournament/rounds/round/game" />
+      <xsd:field xpath="@winner" />
+    </xsd:unique>
+
+  <!-- Keys End -->
+
+  </xsd:element>
+
+  <!-- Tournament Types -->
+
+  <xsd:simpleType name="diceResult">
+    <xsd:restriction base="xsd:positiveInteger">
+      <xsd:minInclusive value="1" />
+      <xsd:maxInclusive value="6" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="fieldPosition">
+    <xsd:restriction base="xsd:positiveInteger">
+      <xsd:minInclusive value="1" />
+      <xsd:maxInclusive value="72" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="statusType">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="running|planned|finished|stopped|[0-3]" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:complexType name="tournamentDescription">
+    <xsd:choice>
+      <xsd:sequence minOccurs="0" maxOccurs="2">
+        <xsd:element name="p" type="t:tournamentDescription"/>
+      </xsd:sequence>
+      <xsd:sequence>
+        <xsd:element name="pTag" type="xsd:string" fixed="&lt;p&gt;"/>
+        <xsd:element name="p" type="t:tournamentDescription" maxOccurs="unbounded"/>
+        <xsd:element name="pEndTag" type="xsd:string" fixed="&lt;/p&gt;"/>
+      </xsd:sequence>
+      <xsd:sequence>
+        <xsd:element name="emTag" type="xsd:string" fixed="&lt;em&gt;"/>
+        <xsd:element name="em" type="xsd:string"/>
+        <xsd:element name="emEndTag" type="xsd:string" fixed="&lt;/em&gt;"/>
+      </xsd:sequence>
+      <xsd:sequence>
+        <xsd:element name="txt" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <!-- Tournament Types End -->
+
+</xsd:schema>

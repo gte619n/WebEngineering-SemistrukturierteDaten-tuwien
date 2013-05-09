@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT t:tournament (t:players, t:rounds, t:description)>
+
+<!ATTLIST t:tournament start-date CDATA #REQUIRED end-date CDATA #REQUIRED registration-deadline CDATA #REQUIRED xmlns:t CDATA #IMPLIED xsi:schemaLocation CDATA #IMPLIED xmlns:xsi CDATA #IMPLIED>
+
+  <!ELEMENT t:players (t:player*)>
+    <!ELEMENT t:player (t:date-of-birth,t:gender)?>
+      <!ATTLIST t:player username ID #IMPLIED ref IDREF #IMPLIED>
+      <!ELEMENT t:date-of-birth (#PCDATA)>
+      <!ELEMENT t:gender (#PCDATA)>
+
+  <!ELEMENT t:rounds (t:round+)>
+    <!ELEMENT t:round (t:game*)>
+      <!ATTLIST t:round number CDATA #REQUIRED>
+      <!ELEMENT t:game (t:players,t:game-history?)>
+        <!ATTLIST t:game date CDATA #REQUIRED status (running|planned|finished|stopped|0|1|2|3) 'planned' duration CDATA #IMPLIED winner IDREF #IMPLIED>
+        <!ELEMENT t:game-history (t:move*)>
+          <!ELEMENT t:move EMPTY>
+            <!ATTLIST t:move player CDATA #REQUIRED dots (1|2|3|4|5|6) #REQUIRED start-point CDATA #REQUIRED end-point CDATA #REQUIRED>
+
+  <!ELEMENT t:description ((t:pTag, t:p+, t:pEndTag)|(t:emTag, t:em, t:emEndTag)|(t:txtTag, t:txt, t:txtEndTag))*>
+    <!ELEMENT t:em (#PCDATA)>
+    <!ELEMENT t:p (#PCDATA|t:em|t:p)*>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<t:tournament xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:t="http://www.dbai.tuwien.ac.at/education/ssd/SS13/uebung/Tournament" xsi:schemaLocation=". tournament.xsd" start-date="2013-05-03" end-date="2013-05-05" registration-deadline="2013-05-01">
+  <t:players>
+    <t:player username="pmig">
+      <t:date-of-birth>1993-09-29</t:date-of-birth>
+      <t:gender>MALE</t:gender>
+    </t:player>
+    <t:player username="Person1">
+      <t:date-of-birth>1990-01-01</t:date-of-birth>
+      <t:gender>FEMALE</t:gender>
+    </t:player>
+    <t:player username="Person2">
+      <t:date-of-birth>1990-01-01</t:date-of-birth>
+      <t:gender>FEMALE</t:gender>
+    </t:player>
+    <t:player username="Person3">
+      <t:date-of-birth>1990-01-01</t:date-of-birth>
+      <t:gender>FEMALE</t:gender>
+    </t:player>
+  </t:players>
+  <t:rounds>
+    <t:round number="1">
+      <t:game date="2013-05-01" duration="1" winner="pmig">
+        <t:players>
+          <t:player ref="pmig"/>
+          <t:player ref="Person2"/>
+        </t:players>
+        <t:game-history>
+          <t:move player="pmig" dots="4" start-point="1" end-point="5" />
+          <t:move player="Person2" dots="1" start-point="1" end-point="2" />
+          <t:move player="pmig" dots="2" start-point="5" end-point="7" />
+        </t:game-history>
+      </t:game>
+      <t:game date="2013-05-01" duration="1" winner="Person1">
+        <t:players>
+          <t:player ref="Person3"/>
+          <t:player ref="Person1"/>
+        </t:players>
+        <t:game-history>
+          <t:move player="Person3" dots="1" start-point="1" end-point="2" />
+          <t:move player="Person1" dots="1" start-point="1" end-point="2" />
+          <t:move player="Person3" dots="1" start-point="2" end-point="3" />
+          <t:move player="Person1" dots="5" start-point="2" end-point="7" />
+        </t:game-history>
+      </t:game>
+    </t:round>
+    <t:round number="2">
+      <t:game date="2013-05-01" duration="1" status="running">
+        <t:players>
+          <t:player ref="pmig"/>
+          <t:player ref="Person1"/>
+        </t:players>
+        <t:game-history>
+          <t:move player="pmig" dots="6" start-point="1" end-point="7" />
+          <t:move player="Person1" dots="1" start-point="1" end-point="2" />
+        </t:game-history>
+      </t:game>
+    </t:round>
+  </t:rounds>
+  <t:description>
+    <t:pTag />
+      <t:p>
+        <t:emTag /><t:em>pmig Turnier</t:em><t:emEndTag />
+      </t:p>
+      <t:p>
+        <t:txt>rocks</t:txt>
+      </t:p>
+    <t:pEndTag />
+  </t:description>
+</t:tournament>
+
