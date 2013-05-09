@@ -33,8 +33,8 @@ public class RegisterController {
     private ArrayList<Player> registeredPlayer = new ArrayList<Player>();
 
 
-    // @ManagedProperty(value="#{loginPlayer}")
-    private Player loginPlayer;
+    //@ManagedProperty(value="#{loginPlayer}")
+    private Player loginPlayer = new Player();
 
     @ManagedProperty(value="#{registerPlayer}")
     private Player registerPlayer;
@@ -83,12 +83,14 @@ public class RegisterController {
    }
 
    public String login(){
-       for(Player player : registeredPlayer){
+         for(Player player : registeredPlayer){
             if(!(player.getUsername().equals(loginPlayer.getUsername()) && player.getPassword().equals(loginPlayer.getPassword()))){
                 return "/login.xhtml";
             }
         }
-        return "/table.xhtml";
+         loginFailed = true;
+         return loginPlayer.getUsername();
+         //return "/login.xhtml";
    }
 
     public Player getLoginPlayer() {

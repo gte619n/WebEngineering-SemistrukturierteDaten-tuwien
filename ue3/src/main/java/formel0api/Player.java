@@ -65,7 +65,7 @@ public class Player {
      * @return the name
      */
     public String getUsername() {
-        return "loool";
+        return this.username;
     }
 
     /**
