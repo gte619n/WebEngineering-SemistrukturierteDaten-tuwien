@@ -20,8 +20,13 @@ Desktop.ini
 ## Pom File + Java
 ##########
 
+# ue2
 ue2/pom.xml
 ue2/target/*
+
+# ue3
+ue3/pom.xml
+ue3/target/*
 
 ###########
 # pmig
