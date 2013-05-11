@@ -14,6 +14,15 @@
         <base-name>i18n</base-name>
         <var>msg</var>
       </resource-bundle>
+      
+      <resource-bundle>
+        <base-name>ValidationMessages</base-name>
+        <var>errmsg</var>
+      </resource-bundle>
+      
+      
+      
+      
     </application>
 </faces-config>
 

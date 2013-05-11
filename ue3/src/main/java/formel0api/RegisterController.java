@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
 /**
@@ -29,7 +31,7 @@ import javax.faces.validator.ValidatorException;
 @ManagedBean(name="controller")
 @ApplicationScoped
 public class RegisterController {
-    private ArrayList<Player> registeredPlayer = new ArrayList<Player>();
+    private ArrayList<Player> registeredPlayer = PlayerStorage.getInstance().getPlayers();
 
     //@ManagedProperty(value="#{loginPlayer}")
     private Player loginPlayer;
@@ -43,43 +45,11 @@ public class RegisterController {
         super();
         registerPlayer = new Player();
         loginPlayer = new Player();
-        
-        
+
+
     }
 
-   public String register(){
- 
-   //validation
-     if(!registerPlayer.getFirstname().matches("[a-zA-Z]+")){
-         FacesMessage msg = new FacesMessage(
-            FacesMessage.SEVERITY_WARN,"Invalid Firstname!", null);
-            throw new ValidatorException(msg);
-     }
-     if(!registerPlayer.getLastname().matches("[a-zA-Z]+")){
-             FacesMessage msg = new FacesMessage(
-            FacesMessage.SEVERITY_WARN,"Invalid Lastname!", null);
-            throw new ValidatorException(msg);
-     }
-     if(!registerPlayer.getBirthdate().matches("^((0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)[0-9][0-9])?$")){
-            FacesMessage msg = new FacesMessage(
-            FacesMessage.SEVERITY_WARN,"Invalid Birthdate!", null);
-            throw new ValidatorException(msg);
-     }
-     if(!registerPlayer.getSex().matches("[a-zA-Z]+")){
-             FacesMessage msg = new FacesMessage(
-            FacesMessage.SEVERITY_WARN,"Invalid Sex!", null);
-            throw new ValidatorException(msg);
-     }
-     if(!registerPlayer.getUsername().matches("[a-zA-Z]+")){
-            FacesMessage msg = new FacesMessage(
-            FacesMessage.SEVERITY_WARN,"Invalid Username!", null);
-            throw new ValidatorException(msg);
-     }
-     if(!registerPlayer.getPassword().matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{2,})")){
-             FacesMessage msg = new FacesMessage(
-            FacesMessage.SEVERITY_WARN,"Invalid Password!", null);
-            throw new ValidatorException(msg);
-     }
+   public String register() throws ValidatorException{
      //Wenn Validierung erfolgreich...
      //Player erzeugen und Attribute setzen.
      Player player = new Player();
@@ -92,25 +62,78 @@ public class RegisterController {
 
      //Zur ArrayList
      registeredPlayer.add(player);
-
-     return "/login";
-     
+        
+     return "/login.xhtml";
    }
 
    public String login(){
-       if(registeredPlayer.size() > 0){  
+        for(Player p: registeredPlayer){
+           System.out.println("Spieler"+p);
+       }
+       if(registeredPlayer.size() > 0){
             for(Player player : registeredPlayer){
-                 if(!(player.getUsername().equals(loginPlayer.getUsername()) && player.getPassword().equals(loginPlayer.getPassword()))){
-                    loginFailed = true;
-                    return "/login.xhtml";
+                 if(player.getUsername().equals(loginPlayer.getUsername()) && player.getPassword().equals(loginPlayer.getPassword())){
+                    loginFailed = false;
+                    return "/table.xhtml";
                  }
             }
        }else{
            return "/login.xhtml";
-            
        }
-        return "/table.html";
+        return "/login.xhtml";
    }
+
+   public void validateFirstname(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
+       String firstname = (String)value;
+        if(!firstname.matches("[a-zA-Z]+")){
+         FacesMessage msg = new FacesMessage(
+            FacesMessage.SEVERITY_WARN,"Invalid Firstname!", null);
+            throw new ValidatorException(msg);
+     }
+   }
+   public void validateLastname(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
+       String lastname = (String)value;
+       if(!lastname.matches("[a-zA-Z]+")){
+             FacesMessage msg = new FacesMessage(
+            FacesMessage.SEVERITY_WARN,"Invalid Lastname!", null);
+            throw new ValidatorException(msg);
+     }
+   }
+   public void validateBirthdate(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
+       String birthday = (String)value;
+       if(!birthday.matches("^((0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)[0-9][0-9])?$")){
+            FacesMessage msg = new FacesMessage(
+            FacesMessage.SEVERITY_WARN, "Invalid Birthdate", null);
+            throw new ValidatorException(msg);
+     }
+   }
+
+   public void validateSex(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
+       String sex = (String)value;
+        if(!sex.matches("[a-zA-Z]+")){
+         FacesMessage msg = new FacesMessage(
+            FacesMessage.SEVERITY_WARN,"Invalid Firstname!", null);
+            throw new ValidatorException(msg);
+     }
+   }
+
+      public void validateUsername(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
+       String username = (String)value;
+          if(!username.matches("[a-zA-Z]+")){
+            FacesMessage msg = new FacesMessage(
+            FacesMessage.SEVERITY_WARN,"Invalid Username!", null);
+            throw new ValidatorException(msg);
+     }
+
+   }
+   public void validatePassword(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
+       String password = (String)value;
+       if(!password.matches("^(?=.*\\d)(?=.*[a-zA-Z]).{2,}$")){
+             FacesMessage msg = new FacesMessage(
+            FacesMessage.SEVERITY_WARN,"Invalid Password!", null);
+            throw new ValidatorException(msg);
+     }
+        }
 
     public Player getLoginPlayer() {
         return loginPlayer;

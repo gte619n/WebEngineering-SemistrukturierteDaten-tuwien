@@ -118,6 +118,7 @@ fieldset {
 label.registerform {
     width: 10em;
     float: left;
+    height: 1em;
 }
 
 .formblock input[type=submit] {

@@ -20,23 +20,23 @@ xmlns:f="http://java.sun.com/jsf/core">
       <h3>#{msg.register_personaldata}</h3>
       <fieldset>
         <h:outputLabel value="#{msg.register_firstname}" for="firstname"  class="registerform" />
-        <h:inputText id="firstname" value="#{controller.registerPlayer.firstname}" required="true" label="#{msg.register_firstname}" />
+        <h:inputText id="firstname" value="#{controller.registerPlayer.firstname}" required="true" validator="#{controller.validateFirstname}" label="#{msg.register_firstname}" />
         <h:message for="firstname" style="color:red" />
         <br />
 
         <h:outputLabel value="#{msg.register_lastname}" for="lastname" class="registerform" />
-        <h:inputText id="lastname" value="#{controller.registerPlayer.lastname}" required="true" label="#{msg.register_lastname}" />
+        <h:inputText id="lastname" value="#{controller.registerPlayer.lastname}" required="true" validator="#{controller.validateLastname}" label="#{msg.register_lastname}" />
         <h:message for="lastname" style="color:red" />
         <br />
 
 
         <h:outputLabel value="#{msg.register_birthdate}" for="birthdate" class="registerform" />
-        <h:inputText id="birthday" value="#{controller.registerPlayer.birthdate}" required="true" label="#{msg.register_birthdate}" />
+        <h:inputText id="birthday" value="#{controller.registerPlayer.birthdate}" required="true" validator="#{controller.validateBirthdate}" label="#{msg.register_birthdate}" />
         <h:message for="birthday" style="color:red" />
         <br />
 
         <h:outputLabel value="#{msg.register_sex}" for="sex" class="registerform" />
-        <h:selectOneMenu id="sex" value="#{controller.registerPlayer.sex}">
+        <h:selectOneMenu id="sex" value="#{controller.registerPlayer.sex}" validator="#{controller.validateSex}">
             <f:selectItem itemValue="male" itemLabel="#{msg.register_male}" />
             <f:selectItem itemValue="female" itemLabel="#{msg.register_female}" />
         </h:selectOneMenu>
@@ -44,12 +44,12 @@ xmlns:f="http://java.sun.com/jsf/core">
         <h3>#{msg.register_logindata}</h3>
 
         <h:outputLabel value="#{msg.register_username}" for="username" class="registerform" />
-        <h:inputText id="username" value="#{controller.registerPlayer.username}" required="true" label="#{msg.register_username}" />
+        <h:inputText id="username" value="#{controller.registerPlayer.username}" required="true" validator="#{controller.validateUsername}" label="#{msg.register_username}" />
         <h:message for="username" style="color:red" />
         <br />
 
         <h:outputLabel value="#{msg.register_password}" for="password" class="registerform" />
-        <h:inputText id="password" value="#{controller.registerPlayer.password}" required="true" label="#{msg.register_password}" />
+        <h:inputText id="password" value="#{controller.registerPlayer.password}" required="true" validator="#{controller.validatePassword}" label="#{msg.register_password}" />
         <h:message for="password" style="color:red" />
         <br />
 
