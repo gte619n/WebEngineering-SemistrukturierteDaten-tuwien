@@ -58,104 +58,113 @@ public class Controller {
    return "/index.xhtml";
  }
 
- public String login(){
-   if(registeredPlayer.size() > 0){
-    for(Player player : registeredPlayer){
-     if(player.getUsername().equals(loginPlayer.getUsername()) && player.getPassword().equals(loginPlayer.getPassword())){
-      game = new Game(player, computerPlayer);
-      return "/table.xhtml";
+  public String login(){
+    if(registeredPlayer.size() > 0){
+      for(Player player : registeredPlayer){
+        if(player.getUsername().equals(loginPlayer.getUsername()) && player.getPassword().equals(loginPlayer.getPassword())){
+          game = new Game(player, computerPlayer);
+          return "/table.xhtml";
+        }
+      }
+    }else{
+    loginFailed = true;
+    return "/index.xhtml";
     }
+    loginFailed = true;
+    return "/index.xhtml";
   }
-}else{
- loginFailed = true;
- return "/index.xhtml";
-}
-loginFailed = true;
-return "/index.xhtml";
-}
 
-public void validateFirstname(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
- String firstname = (String)value;
- if(!firstname.matches("[a-zA-Z]+")){
+  public void validateFirstname(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
+   String firstname = (String)value;
+   if(!firstname.matches("[a-zA-Z]+")){
 
-  String str = bundle.getString("firstnameFalse");
-  FacesMessage  msg = new FacesMessage(str);
-  msg.setSeverity(FacesMessage.SEVERITY_WARN);
+    String str = bundle.getString("firstnameFalse");
+    FacesMessage  msg = new FacesMessage(str);
+    msg.setSeverity(FacesMessage.SEVERITY_WARN);
 
 
-  throw new ValidatorException(msg);
-}
-}
-public void validateLastname(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
- String lastname = (String)value;
- if(!lastname.matches("[a-zA-Z]+")){
-  String str = bundle.getString("lastnameFalse");
-  FacesMessage  msg = new FacesMessage(str);
-  msg.setSeverity(FacesMessage.SEVERITY_WARN);
-  throw new ValidatorException(msg);
-}
-}
-public void validateBirthdate(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
- String birthday = (String)value;
- if(!birthday.matches("^((0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)[0-9][0-9])?$")){
-  String str = bundle.getString("birthdateFalse");
-  FacesMessage  msg = new FacesMessage(str);
-  msg.setSeverity(FacesMessage.SEVERITY_WARN);
-  throw new ValidatorException(msg);
-}
-}
+    throw new ValidatorException(msg);
+  }
+  }
+  public void validateLastname(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
+   String lastname = (String)value;
+   if(!lastname.matches("[a-zA-Z]+")){
+    String str = bundle.getString("lastnameFalse");
+    FacesMessage  msg = new FacesMessage(str);
+    msg.setSeverity(FacesMessage.SEVERITY_WARN);
+    throw new ValidatorException(msg);
+  }
+  }
+  public void validateBirthdate(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
+   String birthday = (String)value;
+   if(!birthday.matches("^((0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)[0-9][0-9])?$")){
+    String str = bundle.getString("birthdateFalse");
+    FacesMessage  msg = new FacesMessage(str);
+    msg.setSeverity(FacesMessage.SEVERITY_WARN);
+    throw new ValidatorException(msg);
+  }
+  }
 
-public void validateSex(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
- String sex = (String)value;
- if(!sex.matches("[a-zA-Z]+")){
-   String str = bundle.getString("sexFalse");
-   FacesMessage  msg = new FacesMessage(str);
-   msg.setSeverity(FacesMessage.SEVERITY_WARN);
-   throw new ValidatorException(msg);
- }
-}
+  public void validateSex(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
+   String sex = (String)value;
+   if(!sex.matches("[a-zA-Z]+")){
+     String str = bundle.getString("sexFalse");
+     FacesMessage  msg = new FacesMessage(str);
+     msg.setSeverity(FacesMessage.SEVERITY_WARN);
+     throw new ValidatorException(msg);
+   }
+  }
 
-public void validateUsername(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
- String username = (String)value;
- if(!username.matches("[a-zA-Z]+")){
-  String str = bundle.getString("userFalse");
-  FacesMessage  msg = new FacesMessage(str);
-  msg.setSeverity(FacesMessage.SEVERITY_WARN);
-  throw new ValidatorException(msg);
-}
+  public void validateUsername(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
+   String username = (String)value;
+   if(!username.matches("[a-zA-Z]+")){
+    String str = bundle.getString("userFalse");
+    FacesMessage  msg = new FacesMessage(str);
+    msg.setSeverity(FacesMessage.SEVERITY_WARN);
+    throw new ValidatorException(msg);
+  }
 
-}
-public void validatePassword(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
- String password = (String)value;
- if(!password.matches("^(?=.*\\d)(?=.*[a-zA-Z]).{2,}$")){
-  String str = bundle.getString("passwordFalse");
-  FacesMessage  msg = new FacesMessage(str);
-  msg.setSeverity(FacesMessage.SEVERITY_WARN);
-  throw new ValidatorException(msg);
-}
-}
+  }
+  public void validatePassword(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
+   String password = (String)value;
+   if(!password.matches("^(?=.*\\d)(?=.*[a-zA-Z]).{2,}$")){
+    String str = bundle.getString("passwordFalse");
+    FacesMessage  msg = new FacesMessage(str);
+    msg.setSeverity(FacesMessage.SEVERITY_WARN);
+    throw new ValidatorException(msg);
+  }
+  }
 
-public Player getLoginPlayer() {
-  return loginPlayer;
-}
+  public Player getLoginPlayer() {
+    return loginPlayer;
+  }
 
-public void setLoginPlayer(Player loginPlayer) {
-  this.loginPlayer = loginPlayer;
-}
+  public void setLoginPlayer(Player loginPlayer) {
+    this.loginPlayer = loginPlayer;
+  }
 
-public Player getRegisterPlayer() {
-  return registerPlayer;
-}
+  public Player getRegisterPlayer() {
+    return registerPlayer;
+  }
 
-public void setRegisterPlayer(Player registerPlayer) {
-  this.registerPlayer = registerPlayer;
-}
+  public void setRegisterPlayer(Player registerPlayer) {
+    this.registerPlayer = registerPlayer;
+  }
 
-public boolean isLoginFailed() {
-  return loginFailed;
-}
+  public boolean isLoginFailed() {
+    return loginFailed;
+  }
 
-public void setLoginFailed(boolean loginFailed) {
-  this.loginFailed = loginFailed;
-}
+  public void setLoginFailed(boolean loginFailed) {
+    this.loginFailed = loginFailed;
+  }
+
+  public Game getGame() {
+    return this.game;
+  }
+
+  public void setGame(Game game) {
+    this.game = game;
+  }
+
 }
