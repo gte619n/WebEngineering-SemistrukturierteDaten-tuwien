@@ -69,7 +69,7 @@ public class RegisterController {
      //Zur ArrayList
      registeredPlayer.add(player);
         
-     return "/login.xhtml";
+     return "/index.xhtml";
    }
 
    public String login(){
@@ -81,10 +81,10 @@ public class RegisterController {
             }
        }else{
            loginFailed = true;
-           return "/login.xhtml";
+           return "/index.xhtml";
        }
         loginFailed = true;
-        return "/login.xhtml";
+        return "/index.xhtml";
    }
 
    public void validateFirstname(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
