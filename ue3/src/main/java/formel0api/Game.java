@@ -1,18 +1,10 @@
-/**
- * <copyright>
- *
- * Copyright (c) 2013 http://www.big.tuwien.ac.at All rights reserved. This
- * program and the accompanying materials are made available under the terms of
- * the Eclipse Public License v1.0 which accompanies this distribution, and is
- * available at http://www.eclipse.org/legal/epl-v10.html
- *
- * </copyright>
- */
 package formel0api;
 
-/**
- * Class representing a Formel 0 game
- */
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+@ManagedBean(name="game")
+@SessionScoped
 public class Game {
 
   private static final int LAST_FIELD = 6;
