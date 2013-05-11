@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class PlayerStorage {
   private static PlayerStorage ps;
-
+ 
   private static ArrayList<Player> players = null;
 
   private PlayerStorage(){
@@ -25,7 +25,7 @@ public class PlayerStorage {
   public Player getComputerPlayer() {
     Player computerPlayer = new Player();
     computerPlayer.setFirstname("Computer");
-     computerPlayer.setUsername("Super C");
+    computerPlayer.setUsername("Super C");
     return computerPlayer;
   }
 }
