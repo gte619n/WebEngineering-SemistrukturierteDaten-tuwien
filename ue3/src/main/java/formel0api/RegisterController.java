@@ -61,12 +61,16 @@ public class RegisterController {
      player.setPassword(registerPlayer.getPassword());
 
      //Zur ArrayList
+     System.out.println(player.getUsername());
      registeredPlayer.add(player);
-
+        for(Player p: registeredPlayer){
+           System.out.println(p);
+       }
      return "/login.xhtml";
    }
 
    public String login(){
+       
        if(registeredPlayer.size() > 0){  
             for(Player player : registeredPlayer){
                  if(!(player.getUsername().equals(loginPlayer.getUsername()) && player.getPassword().equals(loginPlayer.getPassword()))){
