@@ -14,7 +14,8 @@ public class Game {
   private boolean gameOver = false;
   private long gamestarttime = System.currentTimeMillis();
   private long spenttime;
-
+  private int round = 0;
+  
 
   public Game(Player player, Player computer) {
       this.player = player;
@@ -62,7 +63,7 @@ public class Game {
       if (newposition == LAST_FIELD) { // player reached end
         gameOver = true;
       }
-
+      round++;
       return score;
     }
 
@@ -83,4 +84,15 @@ public class Game {
   public Player getComputer() {
     return computer;
   }
+
+    public int getRound() {
+        return round;
+    }
+
+    public void setRound(int round) {
+        this.round = round;
+    }
+  
+  
+  
 }

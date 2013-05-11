@@ -24,7 +24,8 @@ public class PlayerStorage {
 
   public Player getComputerPlayer() {
     Player computerPlayer = new Player();
-    computerPlayer.setFirstname("Super C");
+    computerPlayer.setFirstname("Computer");
+     computerPlayer.setUsername("Super C");
     return computerPlayer;
   }
 }
