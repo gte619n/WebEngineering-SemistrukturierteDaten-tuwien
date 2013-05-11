@@ -69,12 +69,12 @@ public class Controller {
         return "/index.xhtml";
     }
 
-
-
-     public String newGame(){
-        game.getPlayer().setPosition(0);
-        game.getComputer().setPosition(0);
-        this.game = new Game(game.getPlayer(), game.getComputer());
+    public String newGame() {
+        Player fu = game.getPlayer();
+        fu.setPosition(0);
+        Player bar = game.getComputer();
+        bar.setPosition(0);
+        this.game = new Game(fu, bar);
         return "/table.xhtml";
      }
 
@@ -188,7 +188,4 @@ public class Controller {
     public void setGame(Game game) {
         this.game = game;
     }
-
-
-
 }

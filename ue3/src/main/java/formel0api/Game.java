@@ -1,5 +1,6 @@
 package formel0api;
 
+import java.text.SimpleDateFormat;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -15,7 +16,8 @@ public class Game {
     private long gamestarttime = System.currentTimeMillis();
     private long spenttime;
     private int round = 0;
-
+    private final static SimpleDateFormat format = new SimpleDateFormat("mm:ss");
+    
     public Game(Player player, Player computer) {
         this.player = player;
         this.computer = computer;
@@ -25,11 +27,11 @@ public class Game {
         return this.gameOver;
     }
 
-    public long getSpentTime() {
+    public String getSpentTime() {
         if (!gameOver) {
             spenttime = System.currentTimeMillis() - this.gamestarttime;
         }
-        return spenttime;
+        return format.format(spenttime);
     }
 
     public int rollthedice(Player player) {

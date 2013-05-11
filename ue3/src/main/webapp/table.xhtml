@@ -24,8 +24,8 @@
                     <div id="navigation">
                         <h2 class="accessibility">Navigation</h2>
                         <ul title="Navigation">
-                            <li><h:commandLink action="#{controller.newGame()}" value="Neues Spiel">
-
+                            <li><h:commandLink action="#{controller.newGame()}" value="#{msg.table_newGame}" >
+                                            <f:ajax render="all"/> 
                                 </h:commandLink>
                             </li>
                             </ul>
