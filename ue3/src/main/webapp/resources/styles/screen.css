@@ -121,6 +121,10 @@ label.registerform {
     height: 1em;
 }
 
+input[type=text] {
+    height: 1em;
+}
+
 .formblock input[type=submit] {
     float:right;
 }
