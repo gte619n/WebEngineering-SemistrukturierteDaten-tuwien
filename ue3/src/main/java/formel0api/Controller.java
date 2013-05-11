@@ -1,18 +1,3 @@
-/*
- * Copyright 2013 Matthes Laptop.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package formel0api;
 
 import java.util.ArrayList;
@@ -20,19 +5,14 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
-/**
- *
- * @author Matthes Laptop
- */
-
 @ManagedBean(name="controller")
-@ApplicationScoped
-public class RegisterController {
+@SessionScoped
+public class Controller {
     private ArrayList<Player> registeredPlayer = PlayerStorage.getInstance().getPlayers();
 
     //@ManagedProperty(value="#{loginPlayer}")
@@ -43,13 +23,13 @@ public class RegisterController {
 
     private boolean loginFailed = false; //Achtung Variable wird falsch herum benutzt!!
 
-    
-    private Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();  
+
+    private Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
     private ResourceBundle bundle = ResourceBundle.getBundle("i18n", locale, Thread.currentThread().getContextClassLoader());
     //private ResourceBundle bundle = ResourceBundle.getBundle("internationalization.I18n", locale, Thread.currentThread().getContextClassLoader());
-    
 
-    public RegisterController(){
+
+    public Controller(){
         super();
         registerPlayer = new Player();
         loginPlayer = new Player();
@@ -68,7 +48,7 @@ public class RegisterController {
 
      //Zur ArrayList
      registeredPlayer.add(player);
-        
+
      return "/index.xhtml";
    }
 
@@ -90,12 +70,12 @@ public class RegisterController {
    public void validateFirstname(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
        String firstname = (String)value;
         if(!firstname.matches("[a-zA-Z]+")){
-            
+
             String str = bundle.getString("firstnameFalse");
             FacesMessage  msg = new FacesMessage(str);
             msg.setSeverity(FacesMessage.SEVERITY_WARN);
-            
-            
+
+
             throw new ValidatorException(msg);
      }
    }

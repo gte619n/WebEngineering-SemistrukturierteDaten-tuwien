@@ -12,17 +12,9 @@
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
-  <servlet>
-    <servlet-name>Table</servlet-name>
-    <servlet-class>TableServlet</servlet-class>
-  </servlet>
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.xhtml</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>Table</servlet-name>
-    <url-pattern>/table</url-pattern>
   </servlet-mapping>
   <session-config>
     <session-timeout>
