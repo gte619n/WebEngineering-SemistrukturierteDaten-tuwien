@@ -41,7 +41,8 @@ public class RegisterController {
     //@ManagedProperty(value="#{registerPlayer}")
     private Player registerPlayer;
 
-    private boolean loginFailed = false;
+    private boolean loginFailed = false; //Achtung Variable wird falsch herum benutzt!!
+
     
     private Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();  
     private ResourceBundle bundle = ResourceBundle.getBundle("i18n", locale, Thread.currentThread().getContextClassLoader());
@@ -52,8 +53,6 @@ public class RegisterController {
         super();
         registerPlayer = new Player();
         loginPlayer = new Player();
-
-
     }
 
    public String register() throws ValidatorException{
@@ -77,13 +76,14 @@ public class RegisterController {
        if(registeredPlayer.size() > 0){
             for(Player player : registeredPlayer){
                  if(player.getUsername().equals(loginPlayer.getUsername()) && player.getPassword().equals(loginPlayer.getPassword())){
-                    loginFailed = false;
                     return "/table.xhtml";
                  }
             }
        }else{
+           loginFailed = true;
            return "/login.xhtml";
        }
+        loginFailed = true;
         return "/login.xhtml";
    }
 
