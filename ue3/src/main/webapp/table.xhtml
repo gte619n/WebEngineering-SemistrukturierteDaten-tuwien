@@ -73,13 +73,15 @@ xmlns:f="http://java.sun.com/jsf/core">
       </div>
       <div id="player" class="player">
         <h2 class="accessibility">#{msg.table_dice}</h2>
-        <span class="accessibility">#{msg.table_current}</span><div id="currentPlayerName">Super Mario</div>
+        <span class="accessibility">#{msg.table_current}</span>
+        <div id="currentPlayerName">Super Mario</div>
         <input id="dice" type="image" src="resources/img/wuerfel1.png" title="W&uuml;rfel mit einer Eins" alt="W&uuml;rfel mit einer Eins" />
       </div>
     </div>
   </div>
   <div id="footer">
     &copy; 2013 Formel 0
+    #{tablecontroller.test}
   </div>
 </div>
 </h:body>
