@@ -16,6 +16,8 @@
 package formel0api;
 
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
@@ -40,6 +42,11 @@ public class RegisterController {
     private Player registerPlayer;
 
     private boolean loginFailed = false;
+    
+    private Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();  
+    private ResourceBundle bundle = ResourceBundle.getBundle("INSERT PATH HERE", locale, Thread.currentThread().getContextClassLoader());
+    //private ResourceBundle bundle = ResourceBundle.getBundle("internationalization.I18n", locale, Thread.currentThread().getContextClassLoader());
+    
 
     public RegisterController(){
         super();
@@ -67,9 +74,6 @@ public class RegisterController {
    }
 
    public String login(){
-        for(Player p: registeredPlayer){
-           System.out.println("Spieler"+p);
-       }
        if(registeredPlayer.size() > 0){
             for(Player player : registeredPlayer){
                  if(player.getUsername().equals(loginPlayer.getUsername()) && player.getPassword().equals(loginPlayer.getPassword())){
@@ -86,8 +90,14 @@ public class RegisterController {
    public void validateFirstname(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
        String firstname = (String)value;
         if(!firstname.matches("[a-zA-Z]+")){
-         FacesMessage msg = new FacesMessage(
-            FacesMessage.SEVERITY_WARN,"Invalid Firstname!", null);
+            
+            String str = bundle.getString("firstnameFalse");
+            FacesMessage  msg = new FacesMessage(str);
+            msg.setSeverity(FacesMessage.SEVERITY_WARN);
+            
+            
+         //FacesMessage msg = new FacesMessage(
+         //   FacesMessage.SEVERITY_WARN,"Invalid Firstname!", null);
             throw new ValidatorException(msg);
      }
    }
