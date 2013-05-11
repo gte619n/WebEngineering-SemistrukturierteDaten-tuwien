@@ -7,9 +7,9 @@ xmlns:f="http://java.sun.com/jsf/core">
 
 <body>
 
-  <ui:composition template="./login_template.xhtml">
+  <ui:composition id="register" template="./resources/mycomponents/login.xhtml">
     <ui:define name="navigation">
-      <li><a id="register" href="login.xhtml">#{msg.register_login}</a></li>
+      <li><a id="login" href="index.xhtml">#{msg.register_login}</a></li>
     </ui:define>
 
   <ui:define name="content">
@@ -21,18 +21,18 @@ xmlns:f="http://java.sun.com/jsf/core">
       <fieldset>
         <h:outputLabel value="#{msg.register_firstname}" for="firstname"  class="registerform" />
         <h:inputText id="firstname" value="#{controller.registerPlayer.firstname}" required="true" validator="#{controller.validateFirstname}" label="#{msg.register_firstname}" />
-        <h:message for="firstname" style="color:red" />
+        <h:message id="firstname_messages" for="firstname" style="color:red" />
         <br />
 
         <h:outputLabel value="#{msg.register_lastname}" for="lastname" class="registerform" />
         <h:inputText id="lastname" value="#{controller.registerPlayer.lastname}" required="true" validator="#{controller.validateLastname}" label="#{msg.register_lastname}" />
-        <h:message for="lastname" style="color:red" />
+        <h:message id="lastname_messages" for="lastname" style="color:red" />
         <br />
 
 
         <h:outputLabel value="#{msg.register_birthdate}" for="birthdate" class="registerform" />
         <h:inputText id="birthday" value="#{controller.registerPlayer.birthdate}" required="true" validator="#{controller.validateBirthdate}" label="#{msg.register_birthdate}" />
-        <h:message for="birthday" style="color:red" />
+        <h:message id="birthday_messages" for="birthday" style="color:red" />
         <br />
 
         <h:outputLabel value="#{msg.register_sex}" for="sex" class="registerform" />
@@ -45,12 +45,12 @@ xmlns:f="http://java.sun.com/jsf/core">
 
         <h:outputLabel value="#{msg.register_username}" for="username" class="registerform" />
         <h:inputText id="username" value="#{controller.registerPlayer.username}" required="true" validator="#{controller.validateUsername}" label="#{msg.register_username}" />
-        <h:message for="username" style="color:red" />
+        <h:message id="username_messages" for="username" style="color:red" />
         <br />
 
         <h:outputLabel value="#{msg.register_password}" for="password" class="registerform" />
         <h:inputText id="password" value="#{controller.registerPlayer.password}" required="true" validator="#{controller.validatePassword}" label="#{msg.register_password}" />
-        <h:message for="password" style="color:red" />
+        <h:message id="password_messages" for="password" style="color:red" />
         <br />
 
         <p>
