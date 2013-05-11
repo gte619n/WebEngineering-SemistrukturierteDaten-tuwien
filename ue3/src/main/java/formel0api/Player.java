@@ -9,17 +9,19 @@ import javax.faces.bean.ApplicationScoped;
 @ManagedBean(name="player")
 @SessionScoped
 public class Player {
-  private List<Integer> history = new ArrayList<Integer>();
-  private String username;
+  private List<Integer> history = null;
+  private String username = null;
   private int position = 0;
-  private String firstname;
-  private String lastname;
-  private String birthdate;
-  private String sex;
-  private String password;
+  private String firstname = null;
+  private String lastname = null;
+  private String birthdate = null;
+  private String sex = null;
+  private String password = null;
+  private int diceResult = -1;
 
   public Player() {
     super();
+    history = new ArrayList<Integer>();
     setPosition(0);
   }
 
@@ -86,6 +88,14 @@ public class Player {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public int getDiceResult() {
+    return this.diceResult;
+  }
+
+  public void setDiceResult(int diceResult) {
+    this.diceResult = diceResult;
   }
 
   @Override

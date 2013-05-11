@@ -5,8 +5,21 @@ var i = 1;
 var performDice = function(response) {
   // jsp calls the callback function three times with ['begin', 'complete', 'success']
   if (response.status === 'success') {
+    // var playerDiceResult =
+    // var computerDiceResult =
+    // var playerPosition =
+    // var computerPosition =
     console.log(i++);
-    console.log(response);
+    // $("#diceImage").attr("src","img/wuerfel"+data.player1DiceResult+".png");
+    // $("#diceImage").attr("alt","W&uuml;rfel mit einer "+altTextMap[data.player1DiceResult]);
+    movePlayer('#player1', 0, $('#playerScore').html(), $('#playerPosition').html(), function() {
+      movePlayer('#player2', 1, $('#computerScore').html(), $('#computerPosition').html(), function() {
+        completeAnimation();
+        moveFinished = true;
+      });
+    });
+
+
   }
 };
 
@@ -26,14 +39,7 @@ var performError = function() {
  var gameFinished = false;
  var moveFinished = true;
 
- function performRequest(callback) {
-   $.post(window.location.href, function(data) {
-     console.log(data);
-     callback(data);
-   });
- }
-
- function movePlayer(playerIdString, playerId, diceResult, finalPosition, callback) {
+ var movePlayer = function(playerIdString, playerId, diceResult, finalPosition, callback) {
    $(playerIdString).fadeOut(700, function() {
      $(playerIdString).appendTo(positionMap[currentPlayerPosition[playerId] + diceResult]);
      currentPlayerPosition[playerId] = currentPlayerPosition[playerId] + diceResult;
@@ -51,7 +57,7 @@ var performError = function() {
        }
      });
    });
- }
+ };
 
  function finishGame() {
    gameFinished = true;
@@ -79,10 +85,6 @@ var performError = function() {
      prepareAnimation();
      performRequest(function(data) {
 
-       $("#leader").html(data.gameLeader);
-       $("#time").html(data.gameTime);
-       $("#round").html(data.gameRound);
-       $("#computerScore").html(data.player2DiceResult);
        $("#diceImage").attr("src","img/wuerfel"+data.player1DiceResult+".png");
        $("#diceImage").attr("alt","W&uuml;rfel mit einer "+altTextMap[data.player1DiceResult]);
        movePlayer('#player1', 0, data.player1DiceResult, data.player1Position, function() {
