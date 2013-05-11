@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class PlayerStorage {
     private static PlayerStorage ps;
 
-    private ArrayList<Player> players = null;
+    private static ArrayList<Player> players = null;
 
     private PlayerStorage(){
       players = new ArrayList<Player>();

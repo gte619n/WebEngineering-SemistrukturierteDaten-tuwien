@@ -61,27 +61,26 @@ public class RegisterController {
      player.setPassword(registerPlayer.getPassword());
 
      //Zur ArrayList
-     System.out.println(player.getUsername());
      registeredPlayer.add(player);
-        for(Player p: registeredPlayer){
-           System.out.println(p);
-       }
+        
      return "/login.xhtml";
    }
 
    public String login(){
-
+        for(Player p: registeredPlayer){
+           System.out.println("Spieler"+p);
+       }
        if(registeredPlayer.size() > 0){
             for(Player player : registeredPlayer){
-                 if(!(player.getUsername().equals(loginPlayer.getUsername()) && player.getPassword().equals(loginPlayer.getPassword()))){
-                    loginFailed = true;
-                    return "/login.xhtml";
+                 if(player.getUsername().equals(loginPlayer.getUsername()) && player.getPassword().equals(loginPlayer.getPassword())){
+                    loginFailed = false;
+                    return "/table.xhtml";
                  }
             }
        }else{
            return "/login.xhtml";
        }
-        return "/table.xhtml";
+        return "/login.xhtml";
    }
 
    public void validateFirstname(FacesContext ctx, UIComponent component, Object value) throws ValidatorException{
