@@ -25,7 +25,7 @@
                         <h2 class="accessibility">Navigation</h2>
                         <ul title="Navigation">
                             <li><h:commandLink action="#{controller.newGame()}" value="#{msg.table_newGame}" >
-                                            <f:ajax render="all"/> 
+                                            <f:ajax render="all"/>
                                 </h:commandLink>
                             </li>
                             </ul>
@@ -105,7 +105,7 @@
                             <span id="playerScore" class="accessibility">#{controller.game.player.diceResult}</span>
                             <div id="currentPlayerName">#{controller.game.player.username}</div>
                             <h:commandButton image="resources/img/wuerfel1.png" id="dice" title="W&uuml;rfel mit einer Eins" alt="W&uuml;rfel mit einer Eins">
-                                <f:ajax render="all" listener="#{controller.performDice()}" onevent="performDice" />
+                                <f:ajax render="all" listener="#{controller.performDice()}" onevent="performDice" onerror="performError" />
                             </h:commandButton>
 
                         </div>

@@ -1,31 +1,6 @@
 //<![CDATA[
 
-var i = 1;
 
-var performDice = function(response) {
-  // jsp calls the callback function three times with ['begin', 'complete', 'success']
-  if (response.status === 'success') {
-    // var playerDiceResult =
-    // var computerDiceResult =
-    // var playerPosition =
-    // var computerPosition =
-    console.log(i++);
-    // $("#diceImage").attr("src","img/wuerfel"+data.player1DiceResult+".png");
-    // $("#diceImage").attr("alt","W&uuml;rfel mit einer "+altTextMap[data.player1DiceResult]);
-    movePlayer('#player1', 0, $('#playerScore').html(), $('#playerPosition').html(), function() {
-      movePlayer('#player2', 1, $('#computerScore').html(), $('#computerPosition').html(), function() {
-        completeAnimation();
-        moveFinished = true;
-      });
-    });
-
-
-  }
-};
-
-var performError = function() {
-  console.log('finish');
-};
 
 
 /*
@@ -42,6 +17,9 @@ var performError = function() {
  var movePlayer = function(playerIdString, playerId, diceResult, finalPosition, callback) {
    $(playerIdString).fadeOut(700, function() {
      $(playerIdString).appendTo(positionMap[currentPlayerPosition[playerId] + diceResult]);
+     console.log('Position: ' + currentPlayerPosition[playerId] + diceResult);
+     console.log('Append to position: ' + positionMap[currentPlayerPosition[playerId] + diceResult]);
+
      currentPlayerPosition[playerId] = currentPlayerPosition[playerId] + diceResult;
      $(playerIdString).fadeIn(700, function() {
        if (currentPlayerPosition[playerId] !== finalPosition) {
@@ -79,26 +57,31 @@ var performError = function() {
    $("body").append(div);
  }
 
- $("#dice").click(function() {
-   if (!gameFinished && moveFinished) {
-     moveFinished = false;
-     prepareAnimation();
-     performRequest(function(data) {
+ var i = 1;
 
-       $("#diceImage").attr("src","img/wuerfel"+data.player1DiceResult+".png");
-       $("#diceImage").attr("alt","W&uuml;rfel mit einer "+altTextMap[data.player1DiceResult]);
-       movePlayer('#player1', 0, data.player1DiceResult, data.player1Position, function() {
-         movePlayer('#player2', 1, data.player2DiceResult, data.player2Position, function() {
-           if (data.gameFinished == "true")
-             finishGame();
-           completeAnimation();
-           moveFinished = true;
-         });
-       });
-     });
-   }
-   return false;
- });
+var performDice = function(response) {
+  // jsp calls the callback function three times with ['begin', 'complete', 'success']
+  if (response.status === 'success') {
+    console.log(currentPlayerPosition);
+    var playerDiceResult = parseInt($('#playerScore').html(),10);
+    var computerDiceResult = parseInt($('#computerScore').html(),10);
+    var playerPosition = parseInt($('#playerPosition').html(),10);
+    var computerPosition = parseInt($('#computerPosition').html(),10);
+    console.log(i++);
+    movePlayer('#player1', 0, playerDiceResult, playerPosition, function() {
+      movePlayer('#player2', 1, computerDiceResult, computerPosition, function() {
+        completeAnimation();
+        moveFinished = true;
+      });
+    });
 
+
+  }
+};
+
+var performError = function(response) {
+  console.log(response);
+  console.log('finish');
+};
 
 //]]>
