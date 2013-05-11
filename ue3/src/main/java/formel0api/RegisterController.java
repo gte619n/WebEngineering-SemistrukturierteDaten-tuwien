@@ -44,7 +44,7 @@ public class RegisterController {
     private boolean loginFailed = false;
     
     private Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();  
-    private ResourceBundle bundle = ResourceBundle.getBundle("INSERT PATH HERE", locale, Thread.currentThread().getContextClassLoader());
+    private ResourceBundle bundle = ResourceBundle.getBundle("i18n", locale, Thread.currentThread().getContextClassLoader());
     //private ResourceBundle bundle = ResourceBundle.getBundle("internationalization.I18n", locale, Thread.currentThread().getContextClassLoader());
     
 
