@@ -9,18 +9,19 @@ import javax.faces.bean.SessionScoped;
 public class Game {
 
     private static final int LAST_FIELD = 6;
-    private Player player;
-    private Player computer;
+    private Player player = null;
+    private Player computer = null;
     private Dice dice = new Dice();
     private boolean gameOver = false;
     private long gamestarttime = System.currentTimeMillis();
     private long spenttime;
     private int round = 0;
     private final static SimpleDateFormat format = new SimpleDateFormat("mm:ss");
-    
+
     public Game(Player player, Player computer) {
         this.player = player;
         this.computer = computer;
+        gameOver = false;
     }
 
     public boolean isGameOver() {
@@ -93,5 +94,5 @@ public class Game {
     public void setRound(int round) {
         this.round = round;
     }
-   
+
 }

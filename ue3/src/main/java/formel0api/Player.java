@@ -11,7 +11,7 @@ import javax.faces.bean.ApplicationScoped;
 public class Player {
   private List<Integer> history = null;
   private String username = null;
-  private int position = 0;
+  private int position = -1;
   private String firstname = null;
   private String lastname = null;
   private String birthdate = null;
@@ -23,6 +23,7 @@ public class Player {
     super();
     history = new ArrayList<Integer>();
     setPosition(0);
+    setDiceResult(0);
   }
 
   public String getUsername() {

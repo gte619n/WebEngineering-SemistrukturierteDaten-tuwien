@@ -8,6 +8,7 @@
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="./resources/styles/screen.css" rel="stylesheet" type="text/css" />
+<h:outputScript name="jsf.js" library="javax.faces" target="head"/>
 <script type="text/javascript" src="./resources/js/jquery.js"></script>
 <script type="text/javascript" src="./resources/js/table.js"></script>
 <title>#{msg.table_title}</title>
@@ -15,24 +16,24 @@
 
     <h:body>
         <div id="container">
-            <h:form id="all">
                 <div id="bordercontainer">
                     <div id="header">
                         <div id="header_left"><h1 class="accessibility">Formel 0</h1></div>
                         <div id="header_right"></div>
                     </div>
+                    <h:form id="table">
+
                     <div id="navigation">
                         <h2 class="accessibility">Navigation</h2>
                         <ul title="Navigation">
                             <li><h:commandLink action="#{controller.newGame()}" value="#{msg.table_newGame}" >
-                                            <f:ajax render="all"/>
+                                            <f:ajax render="table"/>
                                 </h:commandLink>
                             </li>
                             </ul>
                     </div>
                     <div id="main-area">
-                        <div class="info">
-
+                        <div id="info" class="info">
                             <h2>#{msg.table_gameinformation}</h2>
                             <table summary="#{msg.table_tablesummary}">
                                 <tr>
@@ -99,22 +100,21 @@
                                 </li>
                             </ol>
                         </div>
+
                         <div id="player" class="player">
                             <h2 class="accessibility">#{msg.table_dice}</h2>
-                            <span class="accessibility">#{msg.table_current}</span>
+                            <span class="accessibility">#{msg.table_currenttext}</span>
                             <span id="playerScore" class="accessibility">#{controller.game.player.diceResult}</span>
                             <div id="currentPlayerName">#{controller.game.player.username}</div>
-                            <h:commandButton image="resources/img/wuerfel1.png" id="dice" title="W&uuml;rfel mit einer Eins" alt="W&uuml;rfel mit einer Eins">
-                                <f:ajax render="all" listener="#{controller.performDice()}" onevent="performDice" onerror="performError" />
+                            <h:commandButton image="resources/img/wuerfel0.png" id="dice" class="diceImage" title="W&uuml;rfel mit einer Eins" alt="W&uuml;rfel mit einer Eins">
+                                <f:ajax render="table" listener="#{controller.performDice()}" onevent="performDiceAnimation" />
                             </h:commandButton>
-
                         </div>
                     </div>
+                    </h:form>
                 </div>
-            </h:form>
             <div id="footer">
                 &copy; 2013 Formel 0
-
             </div>
         </div>
     </h:body>

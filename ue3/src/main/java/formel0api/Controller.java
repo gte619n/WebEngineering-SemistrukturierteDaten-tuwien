@@ -14,7 +14,6 @@ import javax.faces.validator.ValidatorException;
 @SessionScoped
 public class Controller {
     // Player Storage
-
     private ArrayList<Player> registeredPlayer = null;
     private Player registerPlayer = null;
     private Player loginPlayer = null;
@@ -72,6 +71,7 @@ public class Controller {
     public String newGame() {
         Player fu = game.getPlayer();
         fu.setPosition(0);
+
         Player bar = game.getComputer();
         bar.setPosition(0);
         this.game = new Game(fu, bar);
@@ -82,13 +82,6 @@ public class Controller {
         game.getPlayer().setDiceResult(game.rollthedice(game.getPlayer()));
         game.getComputer().setDiceResult(game.rollthedice(game.getComputer()));
      }
-
-
-
-
-
-
-
 
 
 
