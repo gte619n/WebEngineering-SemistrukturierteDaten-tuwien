@@ -106,8 +106,8 @@
                             <span class="accessibility">#{msg.table_currenttext}</span>
                             <span id="playerScore" class="accessibility">#{controller.game.player.diceResult}</span>
                             <div id="currentPlayerName">#{controller.game.player.username}</div>
-                            <h:commandButton image="resources/img/wuerfel0.png" id="dice" class="diceImage" title="W&uuml;rfel mit einer Eins" alt="W&uuml;rfel mit einer Eins">
-                                <f:ajax render="info" listener="#{controller.performDice()}" onevent="performDiceAnimation" />
+                            <h:commandButton id="dice" class="diceImage" value="#{controller.performDice()}" image="resources/img/wuerfel0.png" title="W&uuml;rfel mit einer Eins" alt="W&uuml;rfel mit einer Eins">
+                                <f:ajax execute="@this" listener="#{controller.performDice()}" render="info"/>
                             </h:commandButton>
                         </div>
                     </div>
