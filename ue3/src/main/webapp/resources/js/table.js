@@ -56,7 +56,7 @@ $(document).ready(function() {
   };
 
   var performDiceAnimation = function() {
-    startAnimation();
+    // startAnimation();
 
     // set game data
     var round = parseInt($('#round').html(),10);
@@ -93,6 +93,7 @@ $(document).ready(function() {
   };
 
   $(".diceImage").click(function() {
+    startAnimation();
     waitForAjax(performDiceAnimation);
     // waitForAjax(function() {
     //   performDiceAnimation();
