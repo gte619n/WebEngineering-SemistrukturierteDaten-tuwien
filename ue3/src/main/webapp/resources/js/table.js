@@ -33,7 +33,6 @@ $(document).ready(function() {
   };
 
   // Helper Functions
-
   var finishGame = function() {
    gameFinished = true;
    $(".diceImage").attr("src","resources/img/wuerfel0.png");
@@ -56,8 +55,6 @@ $(document).ready(function() {
   };
 
   var performDiceAnimation = function() {
-    // startAnimation();
-
     // set game data
     var round = parseInt($('#round').html(),10);
     var playerDiceResult = parseInt($('#playerScore').html(),10);
@@ -67,10 +64,6 @@ $(document).ready(function() {
 
     // set dice image and alt text
     $(".diceImage").attr("src","resources/img/wuerfel"+playerDiceResult+".png");
-
-    console.log(currentPlayerPosition);
-    console.log('player pos: '+ playerPosition);
-    console.log('copmuter pos: '+ computerPosition);
 
     // move cars
     movePlayer('#player1', 0, playerDiceResult, playerPosition, function() {
@@ -95,9 +88,6 @@ $(document).ready(function() {
   $(".diceImage").click(function() {
     startAnimation();
     waitForAjax(performDiceAnimation);
-    // waitForAjax(function() {
-    //   performDiceAnimation();
-    // });
   });
 });
 
