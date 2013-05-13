@@ -27,6 +27,7 @@ ue2/target/*
 # ue3
 ue3/pom.xml
 ue3/target/*
+ue3/faces-config.NavData
 
 ###########
 # pmig
