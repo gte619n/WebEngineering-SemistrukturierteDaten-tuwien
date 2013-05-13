@@ -15,7 +15,10 @@ import javax.faces.validator.ValidatorException;
 public class Controller {
     // Player Storage
     private ArrayList<Player> registeredPlayer = null;
+    // register Data
     private Player registerPlayer = null;
+    private boolean showTos = false;
+    // login Data
     private Player loginPlayer = null;
     private boolean loginFailed = false;
     private Player computerPlayer = null;
@@ -28,6 +31,7 @@ public class Controller {
         super();
         registeredPlayer = PlayerStorage.getInstance().getPlayers();
         registerPlayer = new Player();
+        showTos = false;
         loginPlayer = new Player();
         computerPlayer = PlayerStorage.getInstance().getComputerPlayer();
         loginFailed = false;
@@ -180,5 +184,13 @@ public class Controller {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public boolean getShowTos() {
+      return this.showTos;
+    }
+
+    public void setShowTos(boolean showTos) {
+      this.showTos = showTos;
     }
 }

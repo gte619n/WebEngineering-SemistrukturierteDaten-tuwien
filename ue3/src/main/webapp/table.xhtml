@@ -33,7 +33,7 @@
                             </ul>
                     </div>
                     <div id="main-area">
-                        <div id="info" class="info">
+                        <h:panelGroup layout="block" id="info" class="info">
                             <h2>#{msg.table_gameinformation}</h2>
                             <table summary="#{msg.table_tablesummary}">
                                 <tr>
@@ -65,7 +65,7 @@
                                     <td id="player2Name" class="data"><h:outputText value="#{controller.game.computer.username}"/></td>
                                 </tr>
                             </table>
-                        </div>
+                        </h:panelGroup>
                         <div id="field" class="field">
                             <h2 class="accessibility">#{msg.table_gamefield}</h2>
                             <span id="playerPosition" class="accessibility">#{controller.game.player.position}</span>
@@ -107,7 +107,7 @@
                             <span id="playerScore" class="accessibility">#{controller.game.player.diceResult}</span>
                             <div id="currentPlayerName">#{controller.game.player.username}</div>
                             <h:commandButton image="resources/img/wuerfel0.png" id="dice" class="diceImage" title="W&uuml;rfel mit einer Eins" alt="W&uuml;rfel mit einer Eins">
-                                <f:ajax render="table" listener="#{controller.performDice()}" onevent="performDiceAnimation" />
+                                <f:ajax render="info" listener="#{controller.performDice()}" onevent="performDiceAnimation" />
                             </h:commandButton>
                         </div>
                     </div>

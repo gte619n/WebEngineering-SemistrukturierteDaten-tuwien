@@ -54,7 +54,17 @@ xmlns:f="http://java.sun.com/jsf/core">
         <br />
 
         <p>
-          <h:commandButton id="submit" value="#{msg.register_button}" action="#{controller.register}"/>
+            <h:selectBooleanCheckbox id="showterms" value="#{controller.showTos}">
+                <f:ajax event="change" execute="@this" render="tosMessage"/>
+            </h:selectBooleanCheckbox>
+            <h:outputLabel value="#{msg.register_showterms}" for="showterms" />
+        </p>
+
+        <h:panelGroup id="tosMessage">
+            <h:outputText id="terms" value="#{msg.register_tos}" rendered="#{controller.showTos}"/>
+        </h:panelGroup>
+        <p>
+            <h:commandButton id="submit" value="#{msg.register_button}" action="#{controller.register}"/>
         </p>
       </fieldset>
     </h:form>
