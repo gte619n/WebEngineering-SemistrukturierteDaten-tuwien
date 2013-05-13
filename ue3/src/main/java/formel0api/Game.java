@@ -75,7 +75,7 @@ public class Game {
         } else if (computer.getPosition() > player.getPosition()) {
             return computer.getUsername();
         } else {
-            return player.getPosition()+"beide";
+            return "beide";
         }
     }
 
