@@ -84,6 +84,8 @@ public class Controller {
 
      public void performDice() {
         game.getPlayer().setDiceResult(game.rollthedice(game.getPlayer()));
+        if (game.isGameOver())
+            return;
         game.getComputer().setDiceResult(game.rollthedice(game.getComputer()));
      }
 
