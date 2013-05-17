@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<player-statistics>
+  <player username="Fritz" gender="MALE" has-played="true"
+            winner-count="3" participated-count="4">
+        
+    <dice-statistics>
+      <one-count>12</one-count>
+      <two-count>3</two-count>
+      <three-count>14</three-count>
+      <four-count>2</four-count>
+      <five-count>0</five-count>
+      <six-count>22</six-count>
+    </dice-statistics>
+  </player>
+    
+  <player username="Silvia" gender="FEMALE" has-played="true"
+            winner-count="3" participated-count="13">
+           
+    <dice-statistics>
+      <one-count>10</one-count>
+      <two-count>2</two-count>
+      <three-count>28</three-count>
+      <four-count>9</four-count>
+      <five-count>17</five-count>
+      <six-count>14</six-count>
+    </dice-statistics>
+    
+  </player>
+</player-statistics>
