@@ -1,0 +1,60 @@
+<!DOCTYPE html><html xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:t="http://www.dbai.tuwien.ac.at/education/ssd/SS13/uebung/Tournament" xmlns:saxon="http://saxon.sf.net/" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta charset="utf-8">
+      <title>Semistrukturierte Daten - SS13</title>
+      <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+   </head>
+   <body>
+      <div class="container">
+         <div class="page-header">
+            <h1>SSD SS13 - XPath</h1>
+         </div>
+         <div class="hero-unit">
+            <ul>
+               <li>Navigation in XML-Dokumenten</li>
+               <li><b>Document Node</b> - Wurzelknoten des Baums
+               </li>
+               <li><b>Element Node</b> - für jedes Element im Dokument
+               </li>
+               <li><b>Attribute Node</b> - assoziiert mit entsprechendem Element Node
+               </li>
+               <li><b>Namespace Node</b> - für alle NS-Präfixe plus einen etwaigen Default-NS, die für ein Element gültig
+                  sind Processing Instruction
+               </li>
+               <li><b>Processing Instruction Node</b> - Node für jede Processing Instruction
+               </li>
+               <li><b>Comment Node</b> - für jeden Kommentar
+               </li>
+               <li><b>Text Node</b> -  Zeichendaten werden in möglichst große Text Nodes zusammengefasst
+               </li>
+               <li><a href="http://www.w3schools.com/xpath/xpath_functions.asp">http://www.w3schools.com/xpath/xpath_functions.asp</a></li>
+            </ul>
+         </div><b>Bis wann darf man sich zu dem Turnier anmelden?</b><div style="height: 6em; overflow: auto;"><code>2013-02-02T23:55:00</code></div>
+         <hr><b>Wie oft hat Fritz eine Fünf gewürfelt?</b><div style="height: 6em; overflow: auto;"><code>6</code></div>
+         <hr><b>Selektieren Sie alle Knoten aus dem Namespace http://www.dbai.tuwien.ac.at/education/ssd/SS13/uebung/Tournament.
+            Beachten Sie dabei, dass der Präfix für einen Namespace nicht immer gleich lauten
+            muss.</b><div style="height: 6em; overflow: auto;"><code>TODO</code></div>
+         <hr><b>Geben Sie das vierte move Element aus, sofern es von Fritz gewürfelt wurde.</b><div style="height: 6em; overflow: auto;"><code>false</code></div>
+         <hr><b>Geben Sie das vierte von Fritz gewürfelte move Element aus.</b><div style="height: 6em; overflow: auto;"><code>&lt;t:move player='Fritz' dots='5' start-point='18' end-point='22'&gt;&lt;/t:move&gt;</code></div>
+         <hr><b>Hat der Turnierteilnehmer Uwe auch tatsächlich ein Spiel gespielt? Die Query soll
+            entweder true oder false zurückliefern.</b><div style="height: 6em; overflow: auto;"><code>true</code></div>
+         <hr><b>Geben Sie den Namen jener Spieler aus, welche sich zwar für das Turnier registriert
+            haben, aber an keinem Spiel teilgenommen haben.</b><div style="height: 6em; overflow: auto;"><code>TODO</code></div>
+         <hr><b>Ermitteln Sie den Durchschnitt der Würfelergebnisse aller von Fritz getätigten Zügen
+            aus jenen Spielen, an denen sowohl Fritz selbst als auch Maria teilgenommen haben.</b><div style="height: 6em; overflow: auto;"><code>TODO: XPath Ausdruck hier einfuegen</code></div>
+         <hr><b>Geben Sie den gesamten Textinhalt des description Elements als (lesbaren) String aus
+            und entfernen Sie eventuell vorhandenen Whitespace.</b><div style="height: 6em; overflow: auto;"><code>
+               This 
+               Tournament is 
+               
+               great
+               !!!
+               </code></div>
+         <hr><b>Jedes XML-Dokument kann bekanntlich als Baum dargestellt werden. Geben Sie die maximale
+            Tiefe des Dokuments aus, d.h. die maximale Länge zwischen Wurzelknoten und beliebigem
+            Blattelement. Hinweis: Werfen Sie einen Blick auf die Achse ancestor.</b><div style="height: 6em; overflow: auto;"><code>TODO</code></div>
+         <hr>
+      </div>
+   </body>
+</html>
