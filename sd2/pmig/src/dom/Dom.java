@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import javax.xml.parsers.*;
 import javax.xml.xpath.*;
 import javax.xml.transform.*;
@@ -38,49 +39,33 @@ public class Dom {
     documentBuilder = documentBuilderFactory.newDocumentBuilder();
   }
 
-  /**
-   * Use this method to encapsulate the main logic for this example. First read in
-   * the tournament document by using Dom.calculateStatistics(Document). Second create
-   * the output document by using Dom.createOutput(List<Player>). Third use a Transformer
-   * to print the document to the output path.
-   *
-   * @param inputPath Path to the xml file to get read in.
-   * @param outputPath Path to the xml file to print statistics.
-   */
   private static void transform(String inputPath, String outputPath) throws Exception {
+    // read
     Document tournamentDocument = documentBuilder.parse(inputPath);
+
+    // calculate
     List<Player> players = calculateStatistics(tournamentDocument);
 
+    // create output
     Document statisticsDocument = createOutput(players);
 
-    System.out.println("\n\n>>>>>>>>>>>>>    (pmig log)    " + players);
-
+    // define output
     TransformerFactory transformerFactory = TransformerFactory.newInstance();
     Transformer transformer = transformerFactory.newTransformer();
     DOMSource source = new DOMSource(statisticsDocument);
     StreamResult result = new StreamResult(new File(outputPath));
 
-    // Output to console for testing
-    // StreamResult result = new StreamResult(System.out);
-
+    // write output
     transformer.transform(source, result);
-
-
-
   }
 
-  /**
-   * Use this method to read in a List of Player objects from the tournament document.
-   *
-   * @param tournamentDocument Xml tournament document.
-   * @return List of Player objects read in from tournamentDocument.
-   */
+
   private static List<Player> calculateStatistics(Document tournamentDocument) throws Exception {
     List<Player> players = new ArrayList<Player>();
     Player playerToAdd = null;
 
     XPathExpression xpathExpr = null;
-    NodeList playerNodes = null;
+    NodeList selectedNodes = null;
     Node currentNode = null;
     Node currentChildNode = null;
     NamedNodeMap attributeMap = null;
@@ -91,18 +76,17 @@ public class Dom {
     // TODO Namespace awerness
 
 
-
     // iterate through tournament players and add to players list
     xpathExpr = xPath.compile("//t:tournament/t:players/t:player");
-    playerNodes = (NodeList)xpathExpr.evaluate(tournamentDocument, XPathConstants.NODESET);
+    selectedNodes = (NodeList)xpathExpr.evaluate(tournamentDocument, XPathConstants.NODESET);
 
     diceStatisticsToClone = new HashMap<Integer, Integer>();
     for (int i = 1; i < 7 ; i++) {
       diceStatisticsToClone.put(i, 0);
     }
 
-    for (int i = 0; i < playerNodes.getLength(); i++) {
-      currentNode = playerNodes.item(i);
+    for (int i = 0; i < selectedNodes.getLength(); i++) {
+      currentNode = selectedNodes.item(i);
       if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
         playerToAdd = new Player();
         attributeMap = currentNode.getAttributes();
@@ -122,24 +106,83 @@ public class Dom {
       }
     }
 
+
     // add dice results
+    xpathExpr = xPath.compile("//t:move");
+    selectedNodes = (NodeList)xpathExpr.evaluate(tournamentDocument, XPathConstants.NODESET);
+    String playerName = null;
+    Integer dots = null;
+    Map<Integer, Integer> playerDiceStatistics = null;
+
+    for (int i = 0; i < selectedNodes.getLength(); i++) {
+      currentNode = selectedNodes.item(i);
+      if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
+        for (Player player : players) {
+          attributeMap = currentNode.getAttributes();
+          playerName = attributeMap.getNamedItem("player").getTextContent();
+          if (player.getUsername().equals(playerName)) {
+            dots = Integer.valueOf(attributeMap.getNamedItem("dots").getTextContent());
+            playerDiceStatistics = player.getDiceStatistics();
+           playerDiceStatistics.put(dots, playerDiceStatistics.get(dots
+            )+1);
+          }
+        }
+      }
+    }
 
 
-    // add participant
+    // add participant count of finished games
+    xpathExpr = xPath.compile("//t:game[@status = 'finished']/t:players/t:player/@ref");
+    selectedNodes = (NodeList)xpathExpr.evaluate(tournamentDocument, XPathConstants.NODESET);
+    String hasParticipatedName = null;
+
+    for (int i = 0; i < selectedNodes.getLength(); i++) {
+      currentNode = selectedNodes.item(i);
+      hasParticipatedName = currentNode.getTextContent();
+      for (Player player : players) {
+        if (hasParticipatedName.equals(player.getUsername())) {
+          player.setParticipatedCount(player.getParticipatedCount()+1);
+        }
+      }
+    }
+
+
+    // add in a game
+    xpathExpr = xPath.compile("//t:game/t:players/t:player/@ref");
+    selectedNodes = (NodeList)xpathExpr.evaluate(tournamentDocument, XPathConstants.NODESET);
+    String hasPlayedName = null;
+
+    for (int i = 0; i < selectedNodes.getLength(); i++) {
+      currentNode = selectedNodes.item(i);
+      hasPlayedName = currentNode.getTextContent();
+      for (Player player : players) {
+        if (hasPlayedName.equals(player.getUsername())) {
+          player.setHasPlayed(true);
+        }
+      }
+    }
 
 
     // add winner
+    xpathExpr = xPath.compile("//t:game/@winner");
+    selectedNodes = (NodeList)xpathExpr.evaluate(tournamentDocument, XPathConstants.NODESET);
+    String winnerName = null;
+
+    for (int i = 0; i < selectedNodes.getLength(); i++) {
+      currentNode = selectedNodes.item(i);
+      winnerName = currentNode.getTextContent();
+      for (Player player : players) {
+        if (winnerName.equals(player.getUsername())) {
+          player.setWinnerCount(player.getWinnerCount()+1);
+        }
+      }
+    }
 
 
     return players;
   }
 
-  /**
-   * Use this method to create the output xml file from a List of Player objects.
-   *
-   * @param players List of Player objects previously read in via Dom.calculateStatistics(Document)
-   * @return Xml document which encapsulates the statistics as required by the task description.
-   */
+
   private static Document createOutput(List<Player> players) {
     Document outputDocument = documentBuilder.newDocument();
     Element rootElement = outputDocument.createElement("player-statistics");
