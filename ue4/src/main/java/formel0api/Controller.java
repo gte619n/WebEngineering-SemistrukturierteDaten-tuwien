@@ -26,6 +26,8 @@ public class Controller {
     // locale Data
     private Locale locale = null;
     private ResourceBundle bundle = null;
+    // external Manager
+    private ExternalManager externalManager = null;
 
     public Controller() {
         super();
@@ -37,6 +39,7 @@ public class Controller {
         loginFailed = false;
         locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
         bundle = ResourceBundle.getBundle("i18n", locale, Thread.currentThread().getContextClassLoader());
+        externalManager = ExternalManager.INSTANCE;
     }
 
     public String register() throws ValidatorException {
@@ -84,9 +87,13 @@ public class Controller {
 
      public void performDice() {
         game.getPlayer().setDiceResult(game.rollthedice(game.getPlayer()));
-        if (game.isGameOver())
+        if (game.isGameOver()) {
+            externalManager.performHighscorePush(game);
             return;
+        }
         game.getComputer().setDiceResult(game.rollthedice(game.getComputer()));
+        if (game.isGameOver())
+            externalManager.performHighscorePush(game);
      }
 
 

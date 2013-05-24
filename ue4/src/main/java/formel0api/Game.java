@@ -11,12 +11,14 @@ public class Game {
     private static final int LAST_FIELD = 6;
     private Player player = null;
     private Player computer = null;
+    private Player winner = null;
     private Dice dice = new Dice();
     private boolean gameOver = false;
     private long gamestarttime = System.currentTimeMillis();
     private long spenttime;
     private int round = 0;
     private final static SimpleDateFormat format = new SimpleDateFormat("mm:ss");
+    private final static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 
     public Game(Player player, Player computer) {
         this.player = player;
@@ -64,6 +66,7 @@ public class Game {
          */
         if (newposition == LAST_FIELD) { // player reached end
             gameOver = true;
+            winner = player;
         }
         round++;
         return score;
@@ -87,12 +90,20 @@ public class Game {
         return computer;
     }
 
+    public Player getWinner() {
+        return winner;
+    }
+
     public int getRound() {
         return round;
     }
 
     public void setRound(int round) {
         this.round = round;
+    }
+
+    public String getStartDate() {
+        return format.format(gamestarttime);
     }
 
 }
