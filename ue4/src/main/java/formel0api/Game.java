@@ -18,7 +18,7 @@ public class Game {
     private long spenttime;
     private int round = 0;
     private final static SimpleDateFormat format = new SimpleDateFormat("mm:ss");
-    private final static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+    private final static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public Game(Player player, Player computer) {
         this.player = player;
@@ -103,7 +103,7 @@ public class Game {
     }
 
     public String getStartDate() {
-        return format.format(gamestarttime);
+        return dateFormat.format(gamestarttime);
     }
 
 }

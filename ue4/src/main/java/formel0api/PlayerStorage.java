@@ -14,6 +14,8 @@ public class PlayerStorage {
     Player conamiPlayer = new Player();
     conamiPlayer.setUsername("aa");
     conamiPlayer.setPassword("a1");
+    conamiPlayer.setSex("FEMALE");
+    conamiPlayer.setBirthdate("1966-06-06");
     players.add(conamiPlayer);
   }
 
@@ -32,6 +34,8 @@ public class PlayerStorage {
     Player computerPlayer = new Player();
     computerPlayer.setFirstname("Computer");
     computerPlayer.setUsername("Super C");
+    computerPlayer.setSex("MALE");
+    computerPlayer.setBirthdate("1966-06-06");
     return computerPlayer;
   }
 }
