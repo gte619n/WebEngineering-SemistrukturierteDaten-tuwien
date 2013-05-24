@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core">
+
+<body>
+
+  <ui:composition id="register" template="./resources/mycomponents/login.xhtml">
+    <ui:define name="navigation">
+      <li><a id="login" href="index.xhtml">#{msg.register_login}</a></li>
+    </ui:define>
+
+  <ui:define name="content">
+  <h2>#{msg.register_title}</h2>
+    <p>#{msg.register_description}</p>
+
+    <h:form id="form">
+      <h3>#{msg.register_personaldata}</h3>
+      <fieldset>
+        <h:outputLabel value="#{msg.register_firstname}" for="firstname"  class="registerform" />
+        <h:inputText id="firstname" value="#{controller.registerPlayer.firstname}" required="true" validator="#{controller.validateFirstname}" label="#{msg.register_firstname}" />
+        <h:message id="firstname_messages" for="firstname" style="color:red" />
+        <br />
+
+        <h:outputLabel value="#{msg.register_lastname}" for="lastname" class="registerform" />
+        <h:inputText id="lastname" value="#{controller.registerPlayer.lastname}" required="true" validator="#{controller.validateLastname}" label="#{msg.register_lastname}" />
+        <h:message id="lastname_messages" for="lastname" style="color:red" />
+        <br />
+
+
+        <h:outputLabel value="#{msg.register_birthdate}" for="birthdate" class="registerform" />
+        <h:inputText id="birthday" value="#{controller.registerPlayer.birthdate}" required="true" validator="#{controller.validateBirthdate}" label="#{msg.register_birthdate}" />
+        <h:message id="birthday_messages" for="birthday" style="color:red" />
+        <br />
+
+        <h:outputLabel value="#{msg.register_sex}" for="sex" class="registerform" />
+        <h:selectOneMenu id="sex" value="#{controller.registerPlayer.sex}" validator="#{controller.validateSex}">
+            <f:selectItem itemValue="male" itemLabel="#{msg.register_male}" />
+            <f:selectItem itemValue="female" itemLabel="#{msg.register_female}" />
+        </h:selectOneMenu>
+
+        <h3>#{msg.register_logindata}</h3>
+
+        <h:outputLabel value="#{msg.register_username}" for="username" class="registerform" />
+        <h:inputText id="username" value="#{controller.registerPlayer.username}" required="true" validator="#{controller.validateUsername}" label="#{msg.register_username}" />
+        <h:message id="username_messages" for="username" style="color:red" />
+        <br />
+
+        <h:outputLabel value="#{msg.register_password}" for="password" class="registerform" />
+        <h:inputText id="password" value="#{controller.registerPlayer.password}" required="true" validator="#{controller.validatePassword}" label="#{msg.register_password}" />
+        <h:message id="password_messages" for="password" style="color:red" />
+        <br />
+
+        <p>
+            <h:selectBooleanCheckbox id="showterms" value="#{controller.showTos}">
+                <f:ajax event="change" execute="@this" render="tosMessage"/>
+            </h:selectBooleanCheckbox>
+            <h:outputLabel value="#{msg.register_showterms}" for="showterms" />
+        </p>
+
+        <h:panelGroup id="tosMessage">
+            <h:outputText id="terms" value="#{msg.register_tos}" rendered="#{controller.showTos}"/>
+        </h:panelGroup>
+        <p>
+            <h:commandButton id="submit" value="#{msg.register_button}" action="#{controller.register}"/>
+        </p>
+      </fieldset>
+    </h:form>
+  </ui:define>
+
+  </ui:composition>
+
+</body>
+</html>
