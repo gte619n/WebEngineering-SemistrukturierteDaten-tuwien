@@ -10,6 +10,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
+
 @ManagedBean(name = "controller")
 @SessionScoped
 public class Controller {
@@ -85,7 +86,7 @@ public class Controller {
         return "/table.xhtml";
      }
 
-     public void performDice() {
+     public void performDice() throws Exception {
         game.getPlayer().setDiceResult(game.rollthedice(game.getPlayer()));
         if (game.isGameOver()) {
             externalManager.performHighscorePush(game);

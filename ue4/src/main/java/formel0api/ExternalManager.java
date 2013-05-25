@@ -15,6 +15,8 @@ import org.w3c.dom.*;
 
 import tuwien.big.formel0.twitter.*;
 
+import twitter4j.*;
+
 
 public enum ExternalManager implements ITwitterClient {
   INSTANCE;
@@ -58,6 +60,7 @@ public enum ExternalManager implements ITwitterClient {
 
       // perform tweet
       publishUuid(twitterMessage);
+
     } catch (Exception e) {
       e.printStackTrace();
       System.err.println(e.getMessage());
@@ -144,9 +147,12 @@ public enum ExternalManager implements ITwitterClient {
   }
 
 
-
   public void publishUuid(TwitterStatusMessage twitterMessage) throws Exception {
+    Twitter twitter = TwitterFactory.getSingleton();
+    Status status = twitter.updateStatus(new StatusUpdate(twitterMessage.getTwitterPublicationString()));
 
   }
+
+  // maybe oauth
 
 }
