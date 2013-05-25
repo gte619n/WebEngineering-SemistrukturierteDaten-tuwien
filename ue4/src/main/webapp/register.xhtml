@@ -37,8 +37,14 @@ xmlns:f="http://java.sun.com/jsf/core">
 
         <h:outputLabel value="#{msg.register_sex}" for="sex" class="registerform" />
         <h:selectOneMenu id="sex" value="#{controller.registerPlayer.sex}" validator="#{controller.validateSex}">
-            <f:selectItem itemValue="male" itemLabel="#{msg.register_male}" />
-            <f:selectItem itemValue="female" itemLabel="#{msg.register_female}" />
+            <f:selectItem itemValue="MALE" itemLabel="#{msg.register_male}" />
+            <f:selectItem itemValue="FEMALE" itemLabel="#{msg.register_female}" />
+        </h:selectOneMenu>
+        <br />
+
+        <h:outputLabel value="#{msg.register_racedriver}" for="raceDriver" class="registerform" />
+        <h:selectOneMenu id="raceDriver" value="#{controller.registerPlayer.raceDriverString}">
+            <f:selectItems value="#{controller.raceDriverNames}" />
         </h:selectOneMenu>
 
         <h3>#{msg.register_logindata}</h3>

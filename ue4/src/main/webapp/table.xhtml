@@ -68,6 +68,13 @@
                                     <td id="player2Name" class="data"><h:outputText value="#{controller.game.computer.username}"/></td>
                                 </tr>
                             </table>
+
+                            <h:link outcome="#{controller.game.player.raceDriver.wikiUrl}" target="_blank" >
+                                <h:graphicImage value="#{controller.game.player.raceDriver.url}" alt="#{controller.game.player.raceDriver.name}" />
+                            </h:link>
+
+
+
                         </h:panelGroup>
                         <div id="field" class="field">
                             <h2 class="accessibility">#{msg.table_gamefield}</h2>

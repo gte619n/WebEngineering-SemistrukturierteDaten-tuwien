@@ -1,5 +1,6 @@
 package formel0api;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -9,6 +10,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
+
+import tuwien.big.formel0.picasa.RaceDriver;
 
 
 @ManagedBean(name = "controller")
@@ -29,6 +32,8 @@ public class Controller {
     private ResourceBundle bundle = null;
     // external Manager
     private ExternalManager externalManager = null;
+    // RaceDriver List
+    private List<RaceDriver> raceDriverList = null;
 
     public Controller() {
         super();
@@ -41,6 +46,12 @@ public class Controller {
         locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
         bundle = ResourceBundle.getBundle("i18n", locale, Thread.currentThread().getContextClassLoader());
         externalManager = ExternalManager.INSTANCE;
+        try {
+            raceDriverList = externalManager.getRaceDrivers();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getMessage());
+        }
     }
 
     public String register() throws ValidatorException {
@@ -53,6 +64,12 @@ public class Controller {
         player.setSex(registerPlayer.getSex());
         player.setUsername(registerPlayer.getUsername());
         player.setPassword(registerPlayer.getPassword());
+
+        // set RaceDriver
+        for (RaceDriver raceDriver : raceDriverList) {
+            if (raceDriver.getName().equals(registerPlayer.getRaceDriverString()))
+                player.setRaceDriver(raceDriver);
+        }
 
         //Zur ArrayList
         registeredPlayer.add(player);
@@ -86,7 +103,11 @@ public class Controller {
         return "/table.xhtml";
      }
 
+
+     // executes after user klicks on dice
      public void performDice() throws Exception {
+        if (game.isGameOver())
+            return;
         game.getPlayer().setDiceResult(game.rollthedice(game.getPlayer()));
         if (game.isGameOver()) {
             externalManager.performHighscorePush(game);
@@ -96,8 +117,6 @@ public class Controller {
         if (game.isGameOver())
             externalManager.performHighscorePush(game);
      }
-
-
 
 
     public void validateFirstname(FacesContext ctx, UIComponent component, Object value) throws ValidatorException {
@@ -125,7 +144,7 @@ public class Controller {
 
     public void validateBirthdate(FacesContext ctx, UIComponent component, Object value) throws ValidatorException {
         String birthday = (String) value;
-        if (!birthday.matches("^((0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)[0-9][0-9])?$")) {
+        if (!birthday.matches("^((19|20)[0-9][0-9][-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01]))?")) {
             String str = bundle.getString("birthdateFalse");
             FacesMessage msg = new FacesMessage(str);
             msg.setSeverity(FacesMessage.SEVERITY_WARN);
@@ -202,5 +221,15 @@ public class Controller {
 
     public void setShowTos(boolean showTos) {
       this.showTos = showTos;
+    }
+
+    public List<String> getRaceDriverNames() {
+        ArrayList<String> raceDriverNames = new ArrayList<String>();
+
+        for (RaceDriver raceDriver : raceDriverList) {
+            raceDriverNames.add(raceDriver.getName());
+        }
+
+        return raceDriverNames;
     }
 }

@@ -6,6 +6,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ApplicationScoped;
 
+import tuwien.big.formel0.picasa.*;
+
+
 @ManagedBean(name="player")
 @SessionScoped
 public class Player {
@@ -18,6 +21,10 @@ public class Player {
   private String sex = null;
   private String password = null;
   private int diceResult = -1;
+
+  // helper attribute to perfom registration
+  private String raceDriverString = null;
+  private RaceDriver raceDriver = null;
 
   public Player() {
     super();
@@ -97,6 +104,22 @@ public class Player {
 
   public void setDiceResult(int diceResult) {
     this.diceResult = diceResult;
+  }
+
+  public String getRaceDriverString() {
+    return this.raceDriverString;
+  }
+
+  public void setRaceDriverString(String raceDriverString) {
+    this.raceDriverString = raceDriverString;
+  }
+
+  public RaceDriver getRaceDriver() {
+    return this.raceDriver;
+  }
+
+  public void setRaceDriver(RaceDriver raceDriver) {
+    this.raceDriver = raceDriver;
   }
 
   @Override

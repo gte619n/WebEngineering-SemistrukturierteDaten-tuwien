@@ -3,6 +3,10 @@ package formel0api;
 import java.io.*;
 
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
+
+import java.net.URL;
 
 import javax.xml.namespace.*;
 import javax.xml.parsers.*;
@@ -14,22 +18,33 @@ import javax.xml.xpath.*;
 import org.w3c.dom.*;
 
 import tuwien.big.formel0.twitter.*;
+import tuwien.big.formel0.picasa.*;
 
 import twitter4j.*;
 
+import com.google.gdata.client.*;
+import com.google.gdata.client.photos.*;
+import com.google.gdata.data.*;
+import com.google.gdata.data.media.*;
+import com.google.gdata.data.photos.*;
+import com.google.gdata.util.ServiceException;
 
-public enum ExternalManager implements ITwitterClient {
+
+// best practice singleton --> threadsave + singleton by default
+public enum ExternalManager implements ITwitterClient, IRaceDriverService {
   INSTANCE;
 
   // soap server parameter
   String soapUrl = "http://playground.big.tuwien.ac.at:8080/highscore/PublishHighScoreService";
-
 
   // SOAP request parameters
   private String tournamentNamespaceURL = "http://www.dbai.tuwien.ac.at/education/ssd/SS13/uebung/Tournament";
   private String tournamentNamespace = "ssd";
   private String dataNamespaceURL = "http://big.tuwien.ac.at/we/highscore/data";
   private String dataNamespace = "data";
+
+  // persistent Driver List
+  private ArrayList<RaceDriver> raceDriverList = new ArrayList<RaceDriver>();
 
   public void performHighscorePush(Game game) {
     SOAPConnectionFactory soapConnectionFactory = null;
@@ -50,7 +65,7 @@ public enum ExternalManager implements ITwitterClient {
       // end connection
       soapConnection.close();
 
-      soapResponse.writeTo(System.err); // debug
+      soapResponse.writeTo(System.out); // debug
 
       // Process the SOAP Response
       uuid = extractUuidFromSoapResponse(soapResponse);
@@ -65,9 +80,17 @@ public enum ExternalManager implements ITwitterClient {
       e.printStackTrace();
       System.err.println(e.getMessage());
     }
-
-
   }
+
+
+  public List<RaceDriver> getRaceDrivers() throws IOException, ServiceException {
+    if (raceDriverList.isEmpty())
+      performPicasaRequest();
+
+    return raceDriverList;
+  }
+
+
 
   private SOAPMessage createSOAPRequest(Game game) throws Exception {
     // Game data
@@ -146,13 +169,63 @@ public enum ExternalManager implements ITwitterClient {
     return selectedNodes.item(0).getTextContent();
   }
 
+  private void performPicasaRequest() {
+    // picasa service helper
+    URL picasaURL = null;
+    PicasawebService myService = null;
+    AlbumFeed picasaAlbumFeed = null;
+
+    // photo attributes
+    String driverName = null;
+    String driverWikiLink = null;
+    String driverPhotoUrl = null;
+    RaceDriver raceDriver = null;
+    boolean isDriver = false;
+
+
+    try {
+      picasaURL = new URL("https://picasaweb.google.com/data/feed/api/user/107302466601293793664/albumid/5868849825181458161");
+      myService = new PicasawebService("we-driver-app");
+
+      picasaAlbumFeed = myService.getFeed(picasaURL, AlbumFeed.class);
+
+      // iterate through photos
+      for(PhotoEntry photo : picasaAlbumFeed.getPhotoEntries()) {
+        isDriver = false;
+
+        // iterate through tags
+        for (String tag : photo.getMediaKeywords().getKeywords()) {
+          if (tag.equals("Driver"))
+            isDriver = true;
+
+          // set wiki link
+          if (tag.contains("wiki"))
+            driverWikiLink = tag.split(":",2)[1];
+
+        }
+
+        // if driver then add
+        if (isDriver) {
+          driverName = photo.getDescription().getPlainText();
+          driverPhotoUrl = photo.getMediaContents().get(0).getUrl();
+
+          raceDriver = new RaceDriver();
+          raceDriver.setName(driverName);
+          raceDriver.setUrl(driverPhotoUrl);
+          raceDriver.setWikiUrl(driverWikiLink);
+
+          raceDriverList.add(raceDriver);
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println(e.getMessage());
+    }
+  }
+
 
   public void publishUuid(TwitterStatusMessage twitterMessage) throws Exception {
     Twitter twitter = TwitterFactory.getSingleton();
     Status status = twitter.updateStatus(new StatusUpdate(twitterMessage.getTwitterPublicationString()));
-
   }
-
-  // maybe oauth
-
 }
