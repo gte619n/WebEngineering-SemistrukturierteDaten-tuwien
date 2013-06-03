@@ -50,10 +50,7 @@
 
           <xsl:call-template name="shownodes">
             <xsl:with-param name="title" select="'Selektieren Sie alle Knoten aus dem Namespace http://www.dbai.tuwien.ac.at/education/ssd/SS13/uebung/Tournament. Beachten Sie dabei, dass der Präfix für einen Namespace nicht immer gleich lauten muss.'" />
-            <!-- <xsl:with-param name="query" select="//fn:substring-before(//*:tournament/name(),':'):*" /> -->
-            <!-- <xsl:with-param name="query" select="//t:*" /> -->
-            <!-- Achsen 2 -->
-            <xsl:with-param name="query" select="'TODO'" />
+            <xsl:with-param name="query" select="//*[namespace-uri()='http://www.dbai.tuwien.ac.at/education/ssd/SS13/uebung/Tournament']" />
           </xsl:call-template>
 
           <xsl:call-template name="shownodes">
@@ -73,23 +70,22 @@
 
           <xsl:call-template name="shownodes">
             <xsl:with-param name="title" select="'Geben Sie den Namen jener Spieler aus, welche sich zwar für das Turnier registriert haben, aber an keinem Spiel teilgenommen haben.'" />
-            <xsl:with-param name="query" select="'TODO'" />
-            <!-- <xsl:with-param name="query" select="//t:player[not(.=//player/@ref)]/@username" /> -->
+            <xsl:with-param name="query" select="/t:tournament/t:players/*[not(@username=//t:game/t:players/t:player/@ref)]/@username" />
           </xsl:call-template>
 
           <xsl:call-template name="shownodes">
             <xsl:with-param name="title" select="'Ermitteln Sie den Durchschnitt der Würfelergebnisse aller von Fritz getätigten Zügen aus jenen Spielen, an denen sowohl Fritz selbst als auch Maria teilgenommen haben.'" />
-            <xsl:with-param name="query" select="'TODO: XPath Ausdruck hier einfuegen'" />
+            <xsl:with-param name="query" select="avg(//t:game[t:players/t:player/@ref='Fritz'][t:players/t:player/@ref='Maria']/t:game-history/t:move[@player='Fritz']/@dots)" />
           </xsl:call-template>
 
           <xsl:call-template name="shownodes">
             <xsl:with-param name="title" select="'Geben Sie den gesamten Textinhalt des description Elements als (lesbaren) String aus und entfernen Sie eventuell vorhandenen Whitespace.'" />
-            <xsl:with-param name="query" select="//t:description" />
+            <xsl:with-param name="query" select="normalize-space(//t:description)" />
           </xsl:call-template>
 
           <xsl:call-template name="shownodes">
             <xsl:with-param name="title" select="'Jedes XML-Dokument kann bekanntlich als Baum dargestellt werden. Geben Sie die maximale Tiefe des Dokuments aus, d.h. die maximale Länge zwischen Wurzelknoten und beliebigem Blattelement. Hinweis: Werfen Sie einen Blick auf die Achse ancestor.'" />
-            <xsl:with-param name="query" select="'TODO'" />
+            <xsl:with-param name="query" select="max(//*/count(ancestor::node()))" />
           </xsl:call-template>
         </div>
       </body>
