@@ -73,9 +73,6 @@ public class Dom {
     HashMap<Integer, Integer> diceStatisticsToClone = null;
 
 
-    // TODO Namespace awerness
-
-
     // iterate through tournament players and add to players list
     xpathExpr = xPath.compile("//t:tournament/t:players/t:player");
     selectedNodes = (NodeList)xpathExpr.evaluate(tournamentDocument, XPathConstants.NODESET);

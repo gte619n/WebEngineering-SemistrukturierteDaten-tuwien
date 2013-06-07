@@ -85,7 +85,7 @@
 
           <xsl:call-template name="shownodes">
             <xsl:with-param name="title" select="'Jedes XML-Dokument kann bekanntlich als Baum dargestellt werden. Geben Sie die maximale Tiefe des Dokuments aus, d.h. die maximale Länge zwischen Wurzelknoten und beliebigem Blattelement. Hinweis: Werfen Sie einen Blick auf die Achse ancestor.'" />
-            <xsl:with-param name="query" select="max(//*/count(ancestor::node()))" />
+            <xsl:with-param name="query" select="max(//*/count(ancestor::*))" />
           </xsl:call-template>
         </div>
       </body>
