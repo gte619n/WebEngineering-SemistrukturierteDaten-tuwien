@@ -72,7 +72,6 @@ public class Dom {
     NodeList playerChildNodes = null;
     HashMap<Integer, Integer> diceStatisticsToClone = null;
 
-
     // iterate through tournament players and add to players list
     xpathExpr = xPath.compile("//t:tournament/t:players/t:player");
     selectedNodes = (NodeList)xpathExpr.evaluate(tournamentDocument, XPathConstants.NODESET);
@@ -103,7 +102,6 @@ public class Dom {
       }
     }
 
-
     // add dice results
     xpathExpr = xPath.compile("//t:move");
     selectedNodes = (NodeList)xpathExpr.evaluate(tournamentDocument, XPathConstants.NODESET);
@@ -127,7 +125,6 @@ public class Dom {
       }
     }
 
-
     // add participant count of finished games
     xpathExpr = xPath.compile("//t:game[@status = 'finished']/t:players/t:player/@ref");
     selectedNodes = (NodeList)xpathExpr.evaluate(tournamentDocument, XPathConstants.NODESET);
@@ -142,7 +139,6 @@ public class Dom {
         }
       }
     }
-
 
     // add in a game
     xpathExpr = xPath.compile("//t:game/t:players/t:player/@ref");
@@ -159,7 +155,6 @@ public class Dom {
       }
     }
 
-
     // add winner
     xpathExpr = xPath.compile("//t:game/@winner");
     selectedNodes = (NodeList)xpathExpr.evaluate(tournamentDocument, XPathConstants.NODESET);
@@ -174,7 +169,6 @@ public class Dom {
         }
       }
     }
-
 
     return players;
   }
