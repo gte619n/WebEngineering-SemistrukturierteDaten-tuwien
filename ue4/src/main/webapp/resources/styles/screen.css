@@ -282,3 +282,7 @@ span#player2 {
     width: 50px;
     float: right;
 }
+
+.driverImage {
+    max-width: 200px;
+}

@@ -8,18 +8,20 @@ import javax.faces.bean.ApplicationScoped;
 
 import tuwien.big.formel0.picasa.*;
 
+import javax.persistence.*;
+
 
 @ManagedBean(name="player")
 @SessionScoped
 public class Player {
-  private List<Integer> history = null;
   private String username = null;
+  private List<Integer> history = null;
+  private String password = null;
   private int position = -1;
   private String firstname = null;
   private String lastname = null;
   private String birthdate = null;
   private String sex = null;
-  private String password = null;
   private int diceResult = -1;
 
   // helper attribute to perfom registration
