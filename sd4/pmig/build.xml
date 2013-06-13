@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ssd-exercise3-ss13" 
+         default="clean" 
+         basedir=".">
+    
+    <!-- Directories -->
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="lib.dir" value="lib"/>
+    <property name="resources.dir" value="resources"/>
+    <property name="output.dir" value="output"/>
+    
+    <!-- XSLT -->
+    <property name="xslt.inputpath" value="${src.dir}/report.xsl"/>
+    <property name="xslt.inputxmlpath" value="${resources.dir}/tournament.xml"/>
+    <property name="xslt.outputpath" value="${output.dir}/xsltreport.tex"/>
+    
+    <!-- Submission .zip file -->
+    <property name="zip.name" value="ssd-exercise4-ss13.zip"/>
+    
+    <!-- Classpath: References compiled classes and libraries in lib.dir -->
+    <path id="classpath">
+        <pathelement location="${build.dir}"/>
+        <fileset dir="${lib.dir}">
+            <include name="saxon9he.jar"/>
+        </fileset>
+    </path>
+    
+    <!-- Create the .zip file for the submission of this exercise -->
+    <target name="zip">
+        <delete file="${zip.name}" />
+        <zip destfile="${zip.name}" encoding="UTF-8">
+            <fileset dir="${src.dir}"/>
+        </zip>
+    </target>
+    
+    <!-- Clean the project -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${output.dir}"/>
+    </target>
+
+    <target name="run-xslt">
+        <java classname="net.sf.saxon.Transform" classpathref="classpath">
+            <arg value="-s:${xslt.inputxmlpath}"/>
+            <arg value="-xsl:${xslt.inputpath}"/>
+            <arg value="-o:${xslt.outputpath}"/>
+        </java>        
+    </target>
+    
+   <taskdef name="latex" classname="de.dokutransdata.antlatex.LaTeX"  
+    classpath="${lib.dir}/ant_latex.jar"/>
+
+    <target name="run-pdflatex" depends="run-xslt">  
+       <latex  
+         latexfile="${xslt.outputpath}"  
+         verbose="on"  
+         clean="on"  
+         pdftex="on"  
+         workingDir="${basedir}"  
+       />  
+     </target>        
+    
+</project>
