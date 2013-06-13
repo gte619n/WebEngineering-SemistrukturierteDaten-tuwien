@@ -19,7 +19,7 @@
 \date{Juni 2013}
 \maketitle
     <xsl:apply-templates/>
-\begin{end}
+\end{document}
   </xsl:template>
 
   <xsl:template match="t:tournament">
@@ -60,18 +60,28 @@
 
   <xsl:template match="t:round">
     \subsection{Runde <xsl:value-of select="@number" />}
-    \subsubsection*{Spiel Fritz vs Maria (<xsl:value-of select="t:game/@status" />)}
-   \begin{enumerate}
     <xsl:apply-templates />
-   \end{enumerate}
   </xsl:template>
-  choose when test otherwise
 
-  <xsl:template match="t:game-history">
-    \item Fritz,
-      \textbf{[Dots]} 5,
-      \textbf{[Start]} 12
-      \textbf{[End]} 17
+  <xsl:template match="t:game">
+    \subsubsection*{Spiel <xsl:value-of select="t:players/t:player[1]/@ref" /><xsl:if test="t:players/t:player[2]/@ref"> vs <xsl:value-of select="t:players/t:player[2]/@ref" /></xsl:if> (<xsl:value-of select="@status" />)}
+    <xsl:choose>
+      <xsl:when test="t:game-history">
+  \begin{enumerate}
+        <xsl:apply-templates />
+  \end{enumerate}
+      </xsl:when>
+      <xsl:otherwise>
+        Keine Spiel History vorhanden.
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template match="t:game-history/t:move">
+    \item <xsl:value-of select="@player" />,
+      \textbf{[Dots]} <xsl:value-of select="@dots" />,
+      \textbf{[Start]} <xsl:value-of select="@start-point" />
+      \textbf{[End]} <xsl:value-of select="@end-point" />
   </xsl:template>
 
 </xsl:stylesheet>
