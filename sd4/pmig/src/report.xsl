@@ -24,7 +24,7 @@
 
   <xsl:template match="t:tournament">
 \section{Tournament Info}
-  <xsl:value-of select="t:description"/>
+  <xsl:value-of select="normalize-space(t:description)"/>
 
 \begin{description}
  \item[Start] <xsl:value-of select="@start-date" />
@@ -65,6 +65,7 @@
     <xsl:apply-templates />
    \end{enumerate}
   </xsl:template>
+  choose when test otherwise
 
   <xsl:template match="t:game-history">
     \item Fritz,
