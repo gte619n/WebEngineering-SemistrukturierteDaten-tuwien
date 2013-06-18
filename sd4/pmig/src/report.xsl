@@ -7,14 +7,18 @@
   <xsl:output method="text" />
   <xsl:template match="text()"/>
 
+  <xsl:param name='name'>Philip Miglinci</xsl:param>
+  <xsl:param name='studentid'>1127853</xsl:param>
+  <xsl:param name='email'>p.miglinci@gmail.com</xsl:param>
+
   <xsl:template match="/">
 \documentclass{article}
 \begin{document}
 
 \title{Tournament Bericht}
-\author{Philip Miglinci\\
- 1127853\\
- p.miglinci@gmail.com
+\author{<xsl:value-of select="$name" />\\
+ <xsl:value-of select="$studentid" />\\
+ <xsl:value-of select="$email" />
 }
 \date{Juni 2013}
 \maketitle
@@ -33,7 +37,6 @@
 \end{description}
     <xsl:apply-templates/>
   </xsl:template>
-
 
   <xsl:template match="t:tournament/t:players">
 \section{Spieler}
